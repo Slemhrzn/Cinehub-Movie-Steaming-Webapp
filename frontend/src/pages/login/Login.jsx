@@ -40,7 +40,7 @@ const Login = () => {
             </div>
             <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
-                <div style={{marginBottom:"20px"}}>
+                <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
                   <label htmlFor="">Username</label>
                   <div>
                     <input
@@ -54,7 +54,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div style={{marginBottom:"20px"}}>
-                  <div>
+                  <div style={{ fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
                     <label htmlFor="">Password</label>
                   </div>
                   <input
@@ -73,11 +73,11 @@ const Login = () => {
                     gap: "80px",
                   }}
                 >
-                  <div>
+                  <div style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>
                     <input type="checkbox" name="" id="" />
                     Remember me
                   </div>
-                  <div>Forgot password?</div>
+                  <div  style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>Forgot password?</div>
                 </div>
                 <div
                   style={{
@@ -93,6 +93,9 @@ const Login = () => {
                     Login
                   </button>
                 </div>
+                <div>
+                    <p style={{color:"black", marginTop:"20px",fontFamily: "'Lobster', cursive",fontSize:"12px"}}>New User? Register now</p>
+                  </div>
               </form>
             </div>
           </div>
