@@ -29,18 +29,18 @@ const Login = () => {
           <h1>Welcome back!</h1>
         </div>
         <div className="login_right">
-          <div>
+          <div style={{height:"80%" , width:"70%"}}>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
               <h2 style={{ fontFamily: "'Lobster', cursive" }}>Login</h2>
-              <p style={{ fontFamily: "'Lobster', cursive", fontSize: "12px" }}>
+              <p style={{ fontFamily: "'Lobster', cursive", fontSize: "12px",marginBottom:"20px" }}>
                 Welcome back! Please login to your account.
               </p>
             </div>
-            <div className="form_box">
+            <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
-                <div>
+                <div style={{marginBottom:"20px"}}>
                   <label htmlFor="">Username</label>
                   <div>
                     <input
@@ -53,7 +53,7 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                <div>
+                <div style={{marginBottom:"20px"}}>
                   <div>
                     <label htmlFor="">Password</label>
                   </div>

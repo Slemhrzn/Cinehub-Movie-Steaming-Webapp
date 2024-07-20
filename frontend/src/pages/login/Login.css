@@ -45,7 +45,7 @@
     background-size: cover;
 }
 
-.form_box{
+.login_form_box{
     display: flex;
     background-color: azure;
     width: 100%;
