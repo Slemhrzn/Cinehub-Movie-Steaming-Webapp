@@ -29,7 +29,7 @@ const Register = () => {
           <h1>Welcome back!</h1>
         </div>
         <div className="register_right">
-          <div style={{height:"70%", width:"70%"}}>
+          <div style={{height:"80%", width:"70%"}}>
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px",marginBottom:"20px" }}
             >
@@ -40,7 +40,7 @@ const Register = () => {
             </div>
             <div className="register_form_box">
               <form onSubmit={hanleSubmit}>
-                <div >
+                <div style={{marginBottom:"20px"}} >
                   <label htmlFor="">Username</label>
                   <div>
                     <input
