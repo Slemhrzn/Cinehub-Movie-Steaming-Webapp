@@ -2,7 +2,7 @@
 Here's a breakdown of what the code is doing: */
 import React, { useState } from "react";
 import "./Register.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -54,11 +54,11 @@ const Register = () => {
             </div>
 
             <div className="register_form_box">
-              <form onSubmit={hanleSubmit}>
-                <div style={{marginBottom:"15px", fontFamily: "'Lobster', cursive" , fontSize:"15px"}}>
-                  <label htmlFor="">Username</label>
-                  <div>
-                    <input
+              <form style={{width:"100%"}} onSubmit={hanleSubmit}>
+                <div className="register_input_container">
+                  <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px",marginRight:"-0.3rem"}} htmlFor="">Username</label>
+                  
+                    <input style={{width:"150px"}}className="register_input"
                       onChange={(e) =>
                         setData({ ...data, username: e.target.value })
                       }
@@ -66,12 +66,12 @@ const Register = () => {
                       name=""
                       id=""
                     />
-                  </div>
+                  
                   </div>
 
-                  <div style={{ marginBottom:"15px",fontFamily: "'Lobster', cursive" , fontSize:"15px"}}><label htmlFor="">Email</label>
-                  <div>
-                    <input
+                  <div className="register_input_container"><label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px",marginRight:"1.8rem"}} htmlFor="">Email</label>
+                  
+                    <input style={{width:"150px"}}className="register_input"
                       onChange={(e) =>
                         setData({ ...data, email: e.target.value })
                       }
@@ -79,16 +79,17 @@ const Register = () => {
                       name=""
                       id=""
                     />
-                  </div>
+                 
                   </div>
                   
                 
 
-                <div>
-                  <div style={{fontFamily: "'Lobster', cursive" , fontSize:"15px"}}>
-                    <label htmlFor="">Password</label>
-                  </div>
-                  <input
+                <div className="register_input_container">
+                 
+                    <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px"}} htmlFor="">Password</label>
+                  
+                  <input style={{width:"150px"}}
+                  className="register_input"
                     type="password"
                     onChange={(e) =>
                       setData({ ...data, password: e.target.value })
@@ -97,6 +98,20 @@ const Register = () => {
                     id=""
                   />
                 </div>
+                <div className="register_input_container">
+                 
+                 <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px"}} htmlFor=""><div>Confirm</div> <div>Password</div></label>
+               
+               <input style={{width:"150px"}}
+               className="register_input"
+                 type="password"
+                 onChange={(e) =>
+                   setData({ ...data, password: e.target.value })
+                 }
+                 name=""
+                 id=""
+               />
+             </div>
 
   
                 
@@ -117,16 +132,18 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <p
-                    style={{
-                      color: "black",
-                      marginTop: "20px",
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "12px",
-                    }}
-                  >
-                    Thank you for registering !
-                  </p>
+               
+                    <p
+                      style={{
+                        color: "black",
+                        marginTop: "20px",
+                        fontFamily: "'Lobster', cursive",
+                        fontSize: "12px", marginBottom:"20px"
+                      }}
+                    >
+                      Thank you for registering !
+                    </p>
+                 
                 </div>
               </form>
             </div>

@@ -50,15 +50,15 @@
     background-color: azure;
     width: 100%;
     height: 80%;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     border-radius: 20px;
     /* background-color:whitesmoke; */
     background-image: url(register_left.jpg);
+    padding-left: 20px;
 }
 
 .register_button{
-    margin-top: 50px;
     background-color: lavender;
     border:none;
     width: 70px;
@@ -67,12 +67,30 @@
     border: 2px solid black;
 }
 
-input[type="text"]{
+/* input[type="text"]{
     width: 120px;
     padding: 5px 3px;
+} */
+
+/* input[type="password"]{
+    width: 120px;
+    padding: 5px 3px;
+} */
+
+.register_input{
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+
+    
 }
 
-input[type="password"]{
-    width: 120px;
-    padding: 5px 3px;
+.register_input_container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    font-family: "Lobster";
+    font-size: 15px;
 }

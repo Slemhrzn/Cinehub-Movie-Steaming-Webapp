@@ -2,7 +2,7 @@
 Here's a breakdown of what the code is doing: */
 import React, { useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,9 +25,11 @@ const Login = () => {
   return (
     <div className="login_container">
       <div className="login_box">
+
         <div className="login_left">
           <h1>Welcome back!</h1>
         </div>
+
         <div className="login_right">
           <div style={{height:"80%" , width:"70%"}}>
             <div
@@ -38,12 +40,13 @@ const Login = () => {
                 Welcome back! Please login to your account.
               </p>
             </div>
+
             <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
                 <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
                   <label htmlFor="">Username</label>
                   <div>
-                    <input
+                    <input style={{borderRadius:"10px",border:"2px solid black"}}
                       onChange={(e) =>
                         setData({ ...data, username: e.target.value })
                       }
@@ -53,11 +56,12 @@ const Login = () => {
                     />
                   </div>
                 </div>
+
                 <div style={{marginBottom:"20px"}}>
                   <div style={{ fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
                     <label htmlFor="">Password</label>
                   </div>
-                  <input
+                  <input style={{borderRadius:"10px",border:"2px solid black"}}
                     type="password"
                     onChange={(e) =>
                       setData({ ...data, password: e.target.value })
@@ -73,12 +77,14 @@ const Login = () => {
                     gap: "80px",
                   }}
                 >
+
                   <div style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>
                     <input type="checkbox" name="" id="" />
                     Remember me
                   </div>
                   <div  style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>Forgot password?</div>
                 </div>
+
                 <div
                   style={{
                     display: "flex",
@@ -93,8 +99,9 @@ const Login = () => {
                     Login
                   </button>
                 </div>
+                
                 <div>
-                    <p style={{color:"black", marginTop:"20px",fontFamily: "'Lobster', cursive",fontSize:"12px"}}>New User? Register now</p>
+                    <p style={{color:"black", marginTop:"20px",fontFamily: "'Lobster', cursive",fontSize:"12px"}}>New User? <Link style={{color:"whitesmoke"}} to={'/register'}>Register now !</Link></p>
                   </div>
               </form>
             </div>
