@@ -1,0 +1,19 @@
+.homepage_container{
+    height: 100vh;
+    width: 100vw;
+    background-color:#69589E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homepage_box{
+    height: 90%;
+    width: 90%;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    
+
+}
+

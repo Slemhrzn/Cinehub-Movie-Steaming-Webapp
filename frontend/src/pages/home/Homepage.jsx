@@ -1,9 +1,16 @@
 import React from 'react'
+import "./Homepage.css";
 
 const Homepage = () => {
   return (
-  <div>
-    This is homepage
+
+  <div className='homepage_container'>
+    
+    <div className='homepage_box'>
+
+    </div>
+
+
   </div>
     
   )
