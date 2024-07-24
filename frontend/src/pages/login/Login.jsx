@@ -52,7 +52,7 @@ const Login = () => {
 
             <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
-                <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
+                <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px", color:"white" }}>
                   <label htmlFor="">Email</label>
                   <div>
                     <input style={{borderRadius:"10px",border:"2px solid black"}}
@@ -66,7 +66,7 @@ const Login = () => {
                 </div>
 
                 <div style={{marginBottom:"20px"}}>
-                  <div style={{ fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
+                  <div style={{ fontFamily: "'Lobster', cursive", fontSize:"15px", color:"white"}}>
                     <label htmlFor="">Password</label>
                   </div>
                   <input style={{borderRadius:"10px",border:"2px solid black"}}
@@ -86,11 +86,11 @@ const Login = () => {
                   }}
                 >
 
-                  <div style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>
+                  {/* <div style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>
                     <input type="checkbox" name="" id="" />
                     Remember me
                   </div>
-                  <div  style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>Forgot password?</div>
+                  <div  style={{ fontFamily: "'Lobster', cursive", fontSize:"14px" }}>Forgot password?</div> */}
                 </div>
 
                 <div

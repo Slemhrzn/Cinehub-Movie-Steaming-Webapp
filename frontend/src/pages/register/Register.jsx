@@ -61,6 +61,7 @@ const Register = () => {
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
                       marginRight: "-0.3rem",
+                      color:"black"
                     }}
                     htmlFor=""
                   >
@@ -68,7 +69,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px" }}
+                    style={{ width: "150px",  height:"35px"}}
                     className="register_input"
                     onChange={(e) => setData({ ...data, name: e.target.value })}
                     type="text"
@@ -81,6 +82,7 @@ const Register = () => {
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
                       marginRight: "1.8rem",
+                      color:"black"
                     }}
                     htmlFor=""
                   >
@@ -88,7 +90,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px" }}
+                    style={{ width: "150px" ,height:"35px" }}
                     className="register_input"
                     onChange={(e) =>
                       setData({ ...data, email: e.target.value })
@@ -102,6 +104,7 @@ const Register = () => {
                     style={{
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
+                      color:"black"
                     }}
                     htmlFor=""
                   >
@@ -109,7 +112,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px" }}
+                    style={{ width: "150px" ,height:"35px" }}
                     className="register_input"
                     type="password"
                     onChange={(e) =>
@@ -122,6 +125,7 @@ const Register = () => {
                     style={{
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
+                      color:"black"
                     }}
                     htmlFor=""
                   >
@@ -129,7 +133,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px" }}
+                    style={{ width: "150px" ,height:"35px" }}
                     className="register_input"
                     type="password"
                     onChange={(e) =>
@@ -145,6 +149,7 @@ const Register = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                   
                   }}
                 >
                   <button
