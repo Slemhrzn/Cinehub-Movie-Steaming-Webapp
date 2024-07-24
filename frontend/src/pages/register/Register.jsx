@@ -3,24 +3,27 @@ Here's a breakdown of what the code is doing: */
 import React, { useState } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    username: "",
+    name: "",
+    email: "",
     password: "",
+    role: "USER",
   });
 
-  console.log("Username: " + data.username);
-  console.log("password: " + data.password);
+  console.log(data);
 
   const hanleSubmit = (e) => {
     e.preventDefault();
-    if (data.username === "admin" && data.password === "admin") {
-      alert("Login success");
-      navigate("/homepage");
-    }
-    console.log(data);
+    axios
+      .post("http://localhost/cinehub/user/registeruser.php", data)
+      .then((response) => {
+        alert(response.data.message);
+        console.log(response.data.message);
+      });
   };
   return (
     <div className="register_container">
@@ -39,14 +42,11 @@ const Register = () => {
                 marginBottom: "20px",
               }}
             >
-              <h2 style={{ fontFamily: "'Lobster', cursive",  }}>
-                Register
-              </h2>
+              <h2 style={{ fontFamily: "'Lobster', cursive" }}>Register</h2>
               <p
                 style={{
                   fontFamily: "'Lobster', cursive",
                   fontSize: "12px",
-                  
                 }}
               >
                 Hello there! Please register to create an account.
@@ -54,42 +54,83 @@ const Register = () => {
             </div>
 
             <div className="register_form_box">
-              <form style={{width:"100%"}} onSubmit={hanleSubmit}>
+              <form style={{ width: "100%" }} onSubmit={hanleSubmit}>
                 <div className="register_input_container">
-                  <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px",marginRight:"-0.3rem"}} htmlFor="">Username</label>
-                  
-                    <input style={{width:"150px"}}className="register_input"
-                      onChange={(e) =>
-                        setData({ ...data, username: e.target.value })
-                      }
-                      type="text"
-                      name=""
-                      id=""
-                    />
-                  
-                  </div>
+                  <label
+                    style={{
+                      fontFamily: "'Lobster', cursive",
+                      fontSize: "15px",
+                      marginRight: "-0.3rem",
+                    }}
+                    htmlFor=""
+                  >
+                    Name
+                  </label>
 
-                  <div className="register_input_container"><label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px",marginRight:"1.8rem"}} htmlFor="">Email</label>
-                  
-                    <input style={{width:"150px"}}className="register_input"
-                      onChange={(e) =>
-                        setData({ ...data, email: e.target.value })
-                      }
-                      type="text"
-                      name=""
-                      id=""
-                    />
-                 
-                  </div>
-                  
-                
+                  <input
+                    style={{ width: "150px" }}
+                    className="register_input"
+                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                    type="text"
+                  />
+                </div>
 
                 <div className="register_input_container">
-                 
-                    <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px"}} htmlFor="">Password</label>
-                  
-                  <input style={{width:"150px"}}
-                  className="register_input"
+                  <label
+                    style={{
+                      fontFamily: "'Lobster', cursive",
+                      fontSize: "15px",
+                      marginRight: "1.8rem",
+                    }}
+                    htmlFor=""
+                  >
+                    Email
+                  </label>
+
+                  <input
+                    style={{ width: "150px" }}
+                    className="register_input"
+                    onChange={(e) =>
+                      setData({ ...data, email: e.target.value })
+                    }
+                    type="text"
+                  />
+                </div>
+
+                <div className="register_input_container">
+                  <label
+                    style={{
+                      fontFamily: "'Lobster', cursive",
+                      fontSize: "15px",
+                    }}
+                    htmlFor=""
+                  >
+                    Password
+                  </label>
+
+                  <input
+                    style={{ width: "150px" }}
+                    className="register_input"
+                    type="password"
+                    onChange={(e) =>
+                      setData({ ...data, password: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="register_input_container">
+                  <label
+                    style={{
+                      fontFamily: "'Lobster', cursive",
+                      fontSize: "15px",
+                    }}
+                    htmlFor=""
+                  >
+                    <div>Confirm</div> <div>Password</div>
+                  </label>
+
+                  <input
+                    style={{ width: "150px" }}
+                    className="register_input"
                     type="password"
                     onChange={(e) =>
                       setData({ ...data, password: e.target.value })
@@ -98,23 +139,6 @@ const Register = () => {
                     id=""
                   />
                 </div>
-                <div className="register_input_container">
-                 
-                 <label style={{fontFamily: "'Lobster', cursive" , fontSize:"15px"}} htmlFor=""><div>Confirm</div> <div>Password</div></label>
-               
-               <input style={{width:"150px"}}
-               className="register_input"
-                 type="password"
-                 onChange={(e) =>
-                   setData({ ...data, password: e.target.value })
-                 }
-                 name=""
-                 id=""
-               />
-             </div>
-
-  
-                
 
                 <div
                   style={{
@@ -124,6 +148,7 @@ const Register = () => {
                   }}
                 >
                   <button
+                    type="submit"
                     style={{ fontFamily: "'Lobster', cursive" }}
                     className="register_button"
                   >
@@ -132,18 +157,17 @@ const Register = () => {
                 </div>
 
                 <div>
-               
-                    <p
-                      style={{
-                        color: "black",
-                        marginTop: "20px",
-                        fontFamily: "'Lobster', cursive",
-                        fontSize: "12px", marginBottom:"20px"
-                      }}
-                    >
-                      Thank you for registering !
-                    </p>
-                 
+                  <p
+                    style={{
+                      color: "black",
+                      marginTop: "20px",
+                      fontFamily: "'Lobster', cursive",
+                      fontSize: "12px",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Thank you for registering !
+                  </p>
                 </div>
               </form>
             </div>

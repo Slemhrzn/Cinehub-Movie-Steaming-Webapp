@@ -3,25 +3,34 @@ Here's a breakdown of what the code is doing: */
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+
+ 
+
   const navigate = useNavigate();
   const [data, setData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
-  console.log("Username: " + data.username);
+  console.log("email: " + data.email);
   console.log("password: " + data.password);
 
   const hanleSubmit = (e) => {
     e.preventDefault();
-    if (data.username === "admin" && data.password === "admin") {
-      alert("Login success");
-      navigate("/homepage");
+    
+    axios.post("http://localhost/cinehub/user/loginuser.php",data)
+    .then(response=>{
+      alert(response.data.message)
+      localStorage.setItem("user",JSON.stringify(response.data.message))
+      console.log(response.data.message)
+    })
+    
+
     }
     console.log(data);
-  };
   return (
     <div className="login_container">
       <div className="login_box">
@@ -44,15 +53,14 @@ const Login = () => {
             <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
                 <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px" }}>
-                  <label htmlFor="">Username</label>
+                  <label htmlFor="">Email</label>
                   <div>
                     <input style={{borderRadius:"10px",border:"2px solid black"}}
                       onChange={(e) =>
-                        setData({ ...data, username: e.target.value })
+                        setData({ ...data, email: e.target.value })
                       }
                       type="text"
-                      name=""
-                      id=""
+                      
                     />
                   </div>
                 </div>
