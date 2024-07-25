@@ -20,12 +20,12 @@ const Login = () => {
 
   const hanleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log(data)
     axios.post("http://localhost/cinehub/user/loginuser.php",data)
     .then(response=>{
       alert(response.data.message)
       localStorage.setItem("user",JSON.stringify(response.data.message))
-      console.log(response.data.message)
+      console.log(response.data)
     })
     
 
@@ -52,10 +52,10 @@ const Login = () => {
 
             <div className="login_form_box">
               <form onSubmit={hanleSubmit}>
-                <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px", color:"white" }}>
+                <div style={{marginBottom:"20px",  fontFamily: "'Lobster', cursive", fontSize:"15px", color:"white"}}>
                   <label htmlFor="">Email</label>
                   <div>
-                    <input style={{borderRadius:"10px",border:"2px solid black"}}
+                    <input style={{borderRadius:"10px",border:"2px solid black",width:"150px" }}
                       onChange={(e) =>
                         setData({ ...data, email: e.target.value })
                       }
@@ -69,7 +69,7 @@ const Login = () => {
                   <div style={{ fontFamily: "'Lobster', cursive", fontSize:"15px", color:"white"}}>
                     <label htmlFor="">Password</label>
                   </div>
-                  <input style={{borderRadius:"10px",border:"2px solid black"}}
+                  <input style={{borderRadius:"10px",border:"2px solid black", width:"150px"}}
                     type="password"
                     onChange={(e) =>
                       setData({ ...data, password: e.target.value })

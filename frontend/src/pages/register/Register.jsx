@@ -16,7 +16,7 @@ const Register = () => {
 
   console.log(data);
 
-  const hanleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost/cinehub/user/registeruser.php", data)
@@ -54,14 +54,15 @@ const Register = () => {
             </div>
 
             <div className="register_form_box">
-              <form style={{ width: "100%" }} onSubmit={hanleSubmit}>
+              <form style={{ width: "100%" }} onSubmit={handleSubmit}>
                 <div className="register_input_container">
                   <label
                     style={{
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
                       marginRight: "-0.3rem",
-                      color:"black"
+                      color:"black",
+                      
                     }}
                     htmlFor=""
                   >
@@ -69,7 +70,7 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px",  height:"35px"}}
+                    style={{ width: "150px",  height:"35px",   marginLeft: "30px"}}
                     className="register_input"
                     onChange={(e) => setData({ ...data, name: e.target.value })}
                     type="text"
