@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import "./Homepage.css";
 import NavBar from "../../components/NavBar";
 import Carousel from "../../components/Carousel";
+import axios from "axios";
+
 
 const Homepage = () => {
+
+
+  const [movie,setMovie]=useState([
+    {
+      id:"",
+      name:"",
+      description:"",
+      url:"",
+      image:""
+    }
+  ]) //for storing and  displaying data 
+ 
+  useEffect(()=>{
+    axios.get("http://localhost/cinehub/movies/getmovies.php")
+    .then((response)=>{
+      console.log(response.data);
+    setMovie(response.data);
+    })
+
+  },[])
+  
+
+
   return (
     <div className="homepage_container">
       <div className="homepage_box">
@@ -42,6 +67,13 @@ const Homepage = () => {
           </button>
         </div>
 
+      <div style={{
+        width:"100%",
+        display:"flex",
+        justifyContent:"space-evenly",
+        flexWrap:"wrap"
+      }}>
+      { movie.map((movie)=>(
         <div class="card">
           <div class="card_background">
             <div
@@ -55,7 +87,7 @@ const Homepage = () => {
               <img  style={{
                 objectFit:"contain"
               }}
-              src="spiderman.jfif"  />
+              src={movie.image}  />
             </div>
 
 
@@ -64,16 +96,19 @@ const Homepage = () => {
                 height: "170px",
                 width: "190px",
                 backgroundColor: "skyblue",
+
               }}
             >
               <span style={{
                 color:"black",
                 
-              }}>Spiderman:No way home</span>
+              }}>{movie.name}</span>
             </div>
           </div>
           <div class="blob"></div>
         </div>
+       )) }
+      </div>
       </div>
     </div>
   );
