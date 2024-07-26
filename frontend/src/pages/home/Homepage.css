@@ -46,7 +46,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #af84d6;
-    ;
+    margin-top: 25px;
   }
   
   .card_background {

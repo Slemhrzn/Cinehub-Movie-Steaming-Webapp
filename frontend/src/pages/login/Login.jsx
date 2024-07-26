@@ -7,16 +7,13 @@ import axios from "axios";
 
 const Login = () => {
 
- 
-
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  console.log("email: " + data.email);
-  console.log("password: " + data.password);
+  
 
   const hanleSubmit = (e) => {
     e.preventDefault();

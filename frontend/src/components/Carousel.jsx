@@ -12,13 +12,13 @@ const Carousel = () => {
   </div>
   <div className="carousel-inner" style={{height:"22rem"}}>
     <div className="carousel-item active" style={{height:"100%"}}>
-      <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/>
+      {/* <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/> */}
     </div>
     <div className="carousel-item active" style={{height:"100%"}}>
-      <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/>
+      {/* <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/> */}
     </div>
     <div className="carousel-item active" style={{height:"100%"}}>
-      <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/>
+      {/* <img src="deadpool.jfif"   style={{width:"100%",height:"100%",objectFit:"cover"}} className="d-block w-100" alt="..."/> */}
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
