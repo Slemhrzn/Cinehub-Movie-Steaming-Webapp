@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from './pages/About'
 import Homepage from './pages/home/Homepage'
 import Register from './pages/register/Register'
+import Admin from './admin/Admin';
+import Addmovie from './admin/Addmovie'
+import Movie from './pages/viewmovie/Movie'
 
 
 function App() {
@@ -15,18 +18,36 @@ function App() {
       path: "/",
       element: <Login />,
     },
+    
     {
       path:"/about",
       element:<About/>
     },
+
     {
       path:"/homepage",
       element:<Homepage/>
     },
+
     {
       path:"/register",
       element:<Register/>
+    },
+
+    {
+      path:"/admin",
+      element:<Admin/>
+    },
+    {
+       path:"/admin/addmovies",
+       element:<Addmovie/>
+    },
+    {
+      path:"/viewmovie",
+      element:<Movie/>
     }
+
+   
   ]);
   return <RouterProvider router={router} />;
 };

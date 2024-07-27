@@ -1,0 +1,24 @@
+.addmovies_container{
+    height: 100%;
+    width: 100vw;
+    padding-bottom: 1rem;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.middle_container{
+    height:100%;
+    width: 60rem;
+    background-color: wheat;
+    padding-bottom: 1rem;
+}
+
+.addmoviesform_box{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

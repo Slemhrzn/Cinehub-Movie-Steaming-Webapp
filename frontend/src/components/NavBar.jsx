@@ -1,6 +1,8 @@
 import React from "react";
 import "./NavBar.css";
-import { FaRegUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 const NavBar = () => {
   return (
     <div className="navbar_container">
@@ -13,10 +15,41 @@ const NavBar = () => {
         </svg>
         <input placeholder="Search" type="search" className="input" />
       </div>
-      <div>Home</div>
-      <div>Movies</div>
-      <div>Genres</div>
-      <div><FaRegUserCircle size={30} /></div>
+      <Link to="/homepage" style={{color:"black",textDecoration:"none"}}>
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: "10px",
+            backgroundColor: "#cec0f5",
+            padding: "5px 20px  ",
+          }}
+        >
+          Home
+        </div>
+      </Link>
+      <div
+        style={{
+          border: "2px solid white",
+          borderRadius: "10px",
+          backgroundColor: "#cec0f5",
+          padding: "5px 20px  ",
+        }}
+      >
+        Movies
+      </div>
+      <div
+        style={{
+          border: "2px solid white",
+          borderRadius: "10px",
+          backgroundColor: "#cec0f5",
+          padding: "5px 20px  ",
+        }}
+      >
+        Genres
+      </div>
+      <div>
+        <FaUserCircle size={30} color="white" />
+      </div>
     </div>
   );
 };

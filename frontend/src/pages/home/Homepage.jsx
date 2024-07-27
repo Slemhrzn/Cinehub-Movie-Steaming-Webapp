@@ -32,12 +32,7 @@ const Homepage = () => {
           <Carousel />
         </div>
 
-        <div>
-          <button className="watch_button" type="submit">
-            Watch
-          </button>
-        </div>
-
+        
         <div
           style={{
             marginTop: "30px",
@@ -48,14 +43,14 @@ const Homepage = () => {
             justifyContent: "space-between",
           }}
         >
-          <span>You might like</span>
+          <span style={{border:"2px solid white", borderRadius:"10px", backgroundColor:"#cec0f5", width: "120px",padding:"2px"}}>You might like</span>
           <button
             style={{
-              border: "2px solid black",
+              border: "2px solid whitesmoke",
               borderRadius: "10px",
               width: "80px",
-              background: "#69589e",
-              color: "white",
+              backgroundColor: "#cec0f5",
+              color: "black",
             }}
           >
             See all
@@ -78,7 +73,7 @@ const Homepage = () => {
                     height: "170px",
                     width: "190px",
                     marginBottom: "5px",
-                    backgroundColor: "#8568b9",
+                    backgroundColor: "rgb(200, 200, 239)",
                   }}
                 >
                   <img
@@ -93,7 +88,7 @@ const Homepage = () => {
                   style={{
                     height: "170px",
                     width: "190px",
-                    backgroundColor: "skyblue",
+                    backgroundColor: " #a0a5da",
                   }}
                 >
                   <span
@@ -116,7 +111,7 @@ const Homepage = () => {
                   </span>
                 </div>
               </div>
-              <div class="blob"></div>
+             
             </div>
           ))}
         </div>

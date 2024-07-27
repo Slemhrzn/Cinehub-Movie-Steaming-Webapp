@@ -1,0 +1,60 @@
+
+.admin_container{
+   
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.left_box{
+    height: 100%;
+    width: 20%;
+    background-color:rgb(163, 203, 239);
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+
+.top_left{
+    text-align: center;
+   
+}
+
+
+
+.bottom_left{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+
+
+}
+
+.right_box{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightcenter_box{
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+    margin-top: 40px;
+    position: relative;
+
+}
+
+.table{
+   
+       
+     
+}
