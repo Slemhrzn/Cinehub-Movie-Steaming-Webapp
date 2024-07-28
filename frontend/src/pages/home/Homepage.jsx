@@ -103,6 +103,7 @@ const Homepage = () => {
                         border: "2px solid white",
                         marginTop: "20px",
                         padding: "5px",
+                        fontFamily: "cursive"
                        
                       }}
                     >

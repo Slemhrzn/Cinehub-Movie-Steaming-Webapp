@@ -7,9 +7,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from './pages/About'
 import Homepage from './pages/home/Homepage'
 import Register from './pages/register/Register'
+import AdminManageMovie from './admin/AdminManageMovie';
 import Admin from './admin/Admin';
 import Addmovie from './admin/Addmovie'
 import Movie from './pages/viewmovie/Movie'
+import Adminnavbar from './components/Adminnavbar'
+import NavBar from './components/NavBar'
 
 
 function App() {
@@ -35,17 +38,26 @@ function App() {
     },
 
     {
-      path:"/admin",
-      element:<Admin/>
-    },
-    {
        path:"/admin/addmovies",
        element:<Addmovie/>
     },
     {
       path:"/viewmovie",
       element:<Movie/>
+    },
+    {
+      path:"/admin",
+      element:<Admin/>
+    },
+    {
+      path:"/admin/managemovie",
+      element:<AdminManageMovie/>
+
     }
+    
+   
+
+
 
    
   ]);

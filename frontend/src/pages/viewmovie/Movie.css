@@ -20,8 +20,53 @@
 }
 
 .viewmovie_videodetail_box{
+    padding: 2rem 2rem;
     margin-top: 30px;
     height: 40vh;
     width: 80vw;
-    background-color: wheat;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:2rem
+}
+
+.viewmovie_left{
+    height: 100%;
+    width: 30%;
+    background-color:  whitesmoke ;
+    border-radius: 20px;
+}
+.viewmovie_middle{
+    height: 100%;
+    width: 50%;
+    background-color:  whitesmoke ;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+    font-family: cursive;
+    padding-left: 20px;
+    border-radius: 20px;
+
+
+}
+
+.viewmovie_right{
+
+    height: 100%;
+    width: 30%;
+    background-color: whitesmoke ;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+    font-family: cursive;
+    padding-left: 20px;
+    border-radius: 20px;
+
+
+
 }

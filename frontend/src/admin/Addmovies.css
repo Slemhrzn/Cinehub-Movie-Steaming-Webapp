@@ -2,16 +2,17 @@
     height: 100%;
     width: 100vw;
     padding-bottom: 1rem;
-    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    background-color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .middle_container{
+    margin-top: 20px;
     height:100%;
     width: 60rem;
-    background-color: wheat;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
     padding-bottom: 1rem;
 }
 

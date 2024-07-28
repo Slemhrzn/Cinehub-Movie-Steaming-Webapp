@@ -1,6 +1,6 @@
 .homepage_container{
     height:auto;
-    width: 100vw;
+    width: 100%;
     background-color: rgb(200, 200, 239);
     display: flex;
     align-items: center;
