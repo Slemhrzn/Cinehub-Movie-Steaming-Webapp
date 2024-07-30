@@ -1,9 +1,21 @@
 import React from "react";
 import "./NavBar.css";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate()
+
+    function handleLogout(){
+      let result = confirm("Do you want to log-out?");
+      if(result == true){
+        navigate("/")
+        localStorage.removeItem("user")
+      }else{
+        return;
+      }
+    }
+
   return (
     <div className="navbar_container">
       {/* search */}{" "}
@@ -47,7 +59,17 @@ const NavBar = () => {
       >
         Genres
       </div>
-      <div>
+     {  <div
+        style={{
+          border: "2px solid white",
+          borderRadius: "10px",
+          backgroundColor: "#cec0f5",
+          padding: "5px 20px  ",
+        }}
+      >
+        My bookmarks
+      </div>}
+      <div onClick={handleLogout}>
         <FaUserCircle size={30} color="white" />
       </div>
     </div>

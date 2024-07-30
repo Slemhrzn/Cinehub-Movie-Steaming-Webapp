@@ -22,7 +22,7 @@
 .viewmovie_videodetail_box{
     padding: 2rem 2rem;
     margin-top: 30px;
-    height: 40vh;
+    height: auto;
     width: 80vw;
     background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
     display: flex;

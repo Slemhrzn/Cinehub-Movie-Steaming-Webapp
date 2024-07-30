@@ -13,6 +13,7 @@ import Addmovie from './admin/Addmovie'
 import Movie from './pages/viewmovie/Movie'
 import Adminnavbar from './components/Adminnavbar'
 import NavBar from './components/NavBar'
+import Checkbox from './Checkbox'
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
        element:<Addmovie/>
     },
     {
-      path:"/viewmovie",
+      path:"/viewmovie/:id",
       element:<Movie/>
     },
     {
@@ -53,6 +54,10 @@ function App() {
       path:"/admin/managemovie",
       element:<AdminManageMovie/>
 
+    },
+    {
+      path:"/checkbox",
+      element:<Checkbox/>
     }
     
    

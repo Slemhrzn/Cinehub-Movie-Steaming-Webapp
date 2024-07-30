@@ -13,6 +13,8 @@ const Login = () => {
     password: "",
   });
 
+  const [user,setUser] = useState({});
+  console.log(user)
   
 
   const hanleSubmit = (e) => {
@@ -20,14 +22,24 @@ const Login = () => {
     console.log(data)
     axios.post("http://localhost/cinehub/user/loginuser.php",data)
     .then(response=>{
-      alert(response.data.message)
+      console.log(response.data.message)
+      setUser(response.data.message)
+      let role = response.data.message.role
+      if(role === "USER"){
+        navigate("/homepage")
+      }
+      else if(role === "ADMIN"){
+        navigate("/admin")
+      }else{
+        alert(response.data.message)
+      }
       localStorage.setItem("user",JSON.stringify(response.data.message))
-      console.log(response.data)
+      // console.log(response.data)
     })
     
 
     }
-    console.log(data);
+    // console.log(data);
   return (
     <div className="login_container">
       <div className="login_box">

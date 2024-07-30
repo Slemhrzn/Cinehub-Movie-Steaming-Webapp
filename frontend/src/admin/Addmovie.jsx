@@ -25,7 +25,7 @@ const Addmovie = () => {
   </div>
 
   <div class="mb-3" style={{display:"flex",flexDirection:"column"}}>
-    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <label for="exampleInputEmail1" class="form-label">Description</label>
    <textarea name="" id=""></textarea>
     
   </div>

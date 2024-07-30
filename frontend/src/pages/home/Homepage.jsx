@@ -3,6 +3,7 @@ import "./Homepage.css";
 import NavBar from "../../components/NavBar";
 import Carousel from "../../components/Carousel";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
   const [movie, setMovie] = useState([
@@ -14,6 +15,9 @@ const Homepage = () => {
       image: "",
     },
   ]); //for storing and  displaying data
+
+  const user = JSON.parse(localStorage.getItem("user"))
+  console.log(user)
 
   useEffect(() => {
     axios
@@ -31,7 +35,7 @@ const Homepage = () => {
         <div>
           <Carousel />
         </div>
-
+      
         
         <div
           style={{
@@ -77,6 +81,8 @@ const Homepage = () => {
                   }}
                 >
                   <img
+                  width={"100%"}
+                  height={"100%"}
                     style={{
                       objectFit: "contain",
                     }}
@@ -97,18 +103,20 @@ const Homepage = () => {
                     }}
                   >
                     {movie.name}
-                    <button
-                      style={{
-                        borderRadius: "20px",
-                        border: "2px solid white",
-                        marginTop: "20px",
-                        padding: "5px",
-                        fontFamily: "cursive"
-                       
-                      }}
-                    >
-                      watch
-                    </button>
+                    <Link to={"/viewmovie/"+movie.id}>
+                      <button
+                        style={{
+                          borderRadius: "20px",
+                          border: "2px solid white",
+                          marginTop: "20px",
+                          padding: "5px",
+                          fontFamily: "cursive"
+                      
+                        }}
+                      >
+                        watch
+                      </button>
+                    </Link>
                   </span>
                 </div>
               </div>
