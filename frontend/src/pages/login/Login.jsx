@@ -24,6 +24,7 @@ const Login = () => {
     .then(response=>{
       console.log(response.data.message)
       setUser(response.data.message)
+      
       let role = response.data.message.role
       if(role === "USER"){
         navigate("/homepage")

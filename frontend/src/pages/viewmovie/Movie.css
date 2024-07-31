@@ -40,7 +40,7 @@
 .viewmovie_middle{
     height: 100%;
     width: 50%;
-    background-color:  whitesmoke ;
+    /* background-color:  whitesmoke ; */
     display: flex;
     justify-content: start;
     align-items: start;
@@ -49,6 +49,7 @@
     font-family: cursive;
     padding-left: 20px;
     border-radius: 20px;
+    text-align: justify;
 
 
 }
@@ -57,7 +58,7 @@
 
     height: 100%;
     width: 30%;
-    background-color: whitesmoke ;
+    /* background-color: whitesmoke ; */
     display: flex;
     justify-content: start;
     align-items: start;
