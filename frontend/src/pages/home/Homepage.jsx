@@ -103,20 +103,21 @@ const Homepage = () => {
                     }}
                   >
                     {movie.name}
-                    <Link to={"/viewmovie/"+movie.id}>
-                      <button
-                        style={{
-                          borderRadius: "20px",
-                          border: "2px solid white",
-                          marginTop: "20px",
-                          padding: "5px",
-                          fontFamily: "cursive"
+                    <div  style={{width:"100%",height:"100%"}}>
+                      <Link to={"/viewmovie/"+movie.id}>
+                        <button
+                          style={{
+                            borderRadius: "20px",
+                            border: "2px solid white",
+                            padding: "5px",
+                            fontFamily: "cursive"
                       
-                        }}
-                      >
-                        watch
-                      </button>
-                    </Link>
+                          }}
+                        >
+                          watch
+                        </button>
+                      </Link>
+                    </div>
                   </span>
                 </div>
               </div>

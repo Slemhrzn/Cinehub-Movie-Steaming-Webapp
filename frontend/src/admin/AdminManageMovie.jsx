@@ -7,19 +7,24 @@ import Adminnavbar from "../components/Adminnavbar";
 const AdminManageMovie = () => {
   const [movies, setMovies] = useState([]);
 
+const[reload,setReload]=useState(1)
+
   useEffect(() => {
     axios
       .get("http://localhost/cinehub/movies/getmovies.php")
       .then((response) => {
         setMovies(response.data);
       });
-  }, []);
+  }, [reload]);
+  
+    console.log(reload)
 
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost/cinehub/movies/deletemovie.php?id=${id}`)
       .then((response) => {
-        setMovies(movies.filter());
+        // setMovies(movies.filter());
+        setReload(reload + 1)  
       })
       .catch((error) => {
         console.error("There was an error deleting the movie!", error);
