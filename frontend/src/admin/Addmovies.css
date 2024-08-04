@@ -2,7 +2,7 @@
     height: 100%;
     width: 100vw;
     padding-bottom: 1rem;
-    background-color: whitesmoke;
+    background-color: rgb(200, 200, 239);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +14,8 @@
     width: 60rem;
     background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
     padding-bottom: 1rem;
+    border-radius: 20px;
+    color:black;
 }
 
 .addmoviesform_box{

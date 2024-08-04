@@ -33,7 +33,7 @@ const Homepage = () => {
       <div className="homepage_box">
         <NavBar />
         <div>
-          <Carousel />
+          <Carousel movie={movie} />
         </div>
       
         

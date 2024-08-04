@@ -7,6 +7,8 @@ import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
+  const[emailError,setEmailError] = useState(false)
+  const[passwordError,setPasswordError]=useState(false)
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -15,6 +17,49 @@ const Register = () => {
   });
 
   console.log(data);
+  function handleEmail(e) {
+    let email = e.target.value;
+    if (validEmail(email)) {
+      setData({ ...data, email: email });
+      setEmailError(false);  // Clear error if the email is valid
+    } else {
+      setEmailError(true);  // Set error if the email is invalid
+    }
+    if (email.length === 0) {  // Clear error if the input is empty
+      setEmailError(false);
+    }
+  }
+  
+  function validEmail(email) {
+    var reg = /^[a-zA-Z0-9_.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+    return reg.test(email);
+  }
+
+
+  function handlePassword(e){
+    let password=e.target.value;
+    if(validPasword(password)){
+      setData({ ...data, password: password });
+      setPasswordError(false);
+    }else{
+      setPasswordError(true);
+    }
+      if(password.length==0){
+        setPasswordError(false);
+      }
+    }
+  function validPasword(password){
+    if(password.length >= 6){
+      return true
+
+    }else{
+        return false
+    }
+
+    }
+
+  
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +67,7 @@ const Register = () => {
       .post("http://localhost/cinehub/user/registeruser.php", data)
       .then((response) => {
         alert(response.data.message);
+        window.location.reload();
         console.log(response.data.message);
       });
   };
@@ -61,8 +107,7 @@ const Register = () => {
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
                       marginRight: "-0.3rem",
-                      color:"black",
-                      
+                      color: "black",
                     }}
                     htmlFor=""
                   >
@@ -70,7 +115,12 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px",  height:"35px",   marginLeft: "30px"}}
+                    style={{
+                      width: "150px",
+                      height: "35px",
+                      marginLeft: "30px",
+                      fontFamily: "'Lobster', cursive",
+                    }}
                     className="register_input"
                     onChange={(e) => setData({ ...data, name: e.target.value })}
                     type="text"
@@ -83,19 +133,21 @@ const Register = () => {
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
                       marginRight: "1.8rem",
-                      color:"black"
+                      color: "black",
                     }}
                     htmlFor=""
                   >
-                    Email
+                    Email 
                   </label>
 
                   <input
-                    style={{ width: "150px" ,height:"35px" }}
+                    style={{
+                      width: "150px",
+                      height: "35px",
+                      fontFamily: "'Lobster', cursive",
+                    }}
                     className="register_input"
-                    onChange={(e) =>
-                      setData({ ...data, email: e.target.value })
-                    }
+                    onChange={handleEmail}
                     type="text"
                   />
                 </div>
@@ -105,7 +157,7 @@ const Register = () => {
                     style={{
                       fontFamily: "'Lobster', cursive",
                       fontSize: "15px",
-                      color:"black"
+                      color: "black",
                     }}
                     htmlFor=""
                   >
@@ -113,57 +165,46 @@ const Register = () => {
                   </label>
 
                   <input
-                    style={{ width: "150px" ,height:"35px" }}
-                    className="register_input"
-                    type="password"
-                    onChange={(e) =>
-                      setData({ ...data, password: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="register_input_container">
-                  <label
                     style={{
+                      width: "150px",
+                      height: "35px",
                       fontFamily: "'Lobster', cursive",
-                      fontSize: "15px",
-                      color:"black"
                     }}
-                    htmlFor=""
-                  >
-                    <div>Confirm</div> <div>Password</div>
-                  </label>
-
-                  <input
-                    style={{ width: "150px" ,height:"35px" }}
                     className="register_input"
                     type="password"
-                    onChange={(e) =>
-                      setData({ ...data, password: e.target.value })
-                    }
-                    name=""
-                    id=""
+                    onChange={handlePassword }
                   />
                 </div>
 
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                   
+                    transform: "translate(130px)",
                   }}
                 >
                   <button
+                  disabled={emailError}
                     type="submit"
                     style={{ fontFamily: "'Lobster', cursive" }}
                     className="register_button"
                   >
-                    Register
+                    Register  
                   </button>
+                  
                 </div>
+                <div style={{color:"red",fontFamily:"cursive"}}>
+                {emailError && " Invalid email !! Please try again" }
+                
+                </div>
+               <div   style={{color:"red" ,fontFamily:"cursive"}}>
+               {passwordError && " Invalid password!! Please try again" }
+               </div>
+
+
+                
 
                 <div>
-                  <p
+                
+                  <div
                     style={{
                       color: "black",
                       marginTop: "20px",
@@ -172,8 +213,11 @@ const Register = () => {
                       marginBottom: "20px",
                     }}
                   >
-                    Thank you for registering !
-                  </p>
+                    Already have an account?{" "}
+                    <Link style={{ color: "black"}} to="/">
+                      Login
+                    </Link>
+                  </div>
                 </div>
               </form>
             </div>

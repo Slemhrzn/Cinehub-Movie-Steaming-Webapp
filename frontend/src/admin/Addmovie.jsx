@@ -5,15 +5,35 @@ import axios from "axios";
 import { storage } from "../firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-
+import { ProgressBar } from "react-loader-spinner";
 const Addmovie = () => {
-  const [submitBtn,setSubmitBtn] = useState(false)
-  const[message,setMessage] = useState("processing please wait")
+  const [nameError, setNameError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [urlError, setUrlError] = useState(false);
+  const [genreError, setGenreError] = useState(false);
+  const [hourError, setHourError] = useState(false);
+  const [minutesError, setMinutesError] = useState(false);
+  const [postingButton, setPostingButton] = useState(false);
+  const [releaseError,setReleaseError] = useState(false);
+
+
+  console.log(nameError);
+  console.log(descriptionError);
+  console.log(imageError);
+  console.log(urlError);
+  console.log(genreError);
+  console.log(hourError);
+  console.log(minutesError);
+  console.log(postingButton);
+  console.log(releaseError);
+
+
   const [data, setData] = useState({
     name: "",
     description: "",
-    url: "qwe",
-    image: "qwe",
+    url: "",
+    image: "",
     duration: "",
     releasedate: "",
     genre: [],
@@ -21,17 +41,20 @@ const Addmovie = () => {
 
   const [imageUpload, setImageUpload] = useState(null);
   const [videoUpload, setVideoUpload] = useState(null);
-  console.log(videoUpload?.name)
+
+  // console.log(videoUpload?.name);
   const [error, setError] = useState({
     hourErr: "",
     minuteErr: "",
   });
 
   const [genres, setGenres] = useState([
-    "comedy",
-    "thriller",
-    "action",
-    "romantic",
+    "Comedy",
+    "Thriller",
+    "Action",
+    "Romantic",
+    "Drama",
+    "Horror"
   ]);
 
   const [duration, setDuration] = useState({
@@ -43,22 +66,28 @@ const Addmovie = () => {
 
   const handleChange = (e) => {
     const { checked, value } = e.target;
-    console.log(value);
+    // console.log(value);
     if (checked) {
-      setData({ ...data, genre: [...data.genre, value] });
+      setGenreError(false);
+
+      setData({ ...data, genre: [...data?.genre, value] });
     } else {
+      setGenreError(true);
+
       setData({ ...data, genre: data.genre.filter((i) => i !== value) });
     }
   };
-  console.log(data.genre);
+  // console.log(data.genre);
 
   function handleHour(e) {
     const value = Number.parseInt(e.target.value);
     if (value <= 12 && value > -1) {
-      setError({ ...error, hourErr: "" });
+      setHourError(false);
+
       setDuration({ ...duration, hour: value.toString() });
     } else {
-      setError({ ...error, hourErr: "Invalid Hour input" });
+      setHourError(true);
+
       // setDuration({...duration,hour:""})
     }
   }
@@ -66,16 +95,85 @@ const Addmovie = () => {
   function handleMinutes(e) {
     const value = Number.parseInt(e.target.value);
     if (value <= 59 && value > -1) {
-      setError({ ...error, minuteErr: "" });
+      setMinutesError(false);
       setDuration({ ...duration, minutes: value.toString() });
     } else {
-      setError({ ...error, minuteErr: "Invalid input in minute" });
+      setMinutesError(true);
+    }
+  }
+
+  function handleName(e) {
+    let name = e.target.value;
+    if (name.length > 0) {
+      setData({ ...data, name: name });
+      setNameError(false);
+    } else {
+      setNameError(true);
+    }
+  }
+
+  function handleDescription(e) {
+    let description = e.target.value;
+    if (description.trim().length > 10) {
+      setData({ ...data, description: description });
+      setDescriptionError(false);
+    } else {
+      setDescriptionError(true);
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitBtn(true)
+    setPostingButton(true);
+    if (data.name.length <= 0) {
+      setNameError(true);
+      setPostingButton(false);
+      return;
+    }
+
+    if (data.description.length < 10) {
+      setPostingButton(false);
+      setDescriptionError(true);
+      return;
+    }
+
+    if (imageUpload == null) {
+      setPostingButton(false);
+      setImageError(true);
+      return;
+    }
+    if (videoUpload == null) {
+      // console.log(videoUpload);
+      setPostingButton(false);
+      setUrlError(true);
+      return;
+    }
+
+    if (duration.hour <= 0 && duration.hour < 13) {
+      setHourError(true);
+      setPostingButton(false);
+      return;
+    }
+
+    if (duration.minutes < 0 && duration.minutes > 60) {
+      setPostingButton(false);
+      setMinutesError(true);
+      return;
+    }
+
+    if(data.releasedate <= 0){
+      setPostingButton(false);
+      setReleaseError(true)
+      return
+    }
+
+
+    if (data?.genre?.length == 0) {
+      setPostingButton(false);
+      setGenreError(true);
+      return;
+    }
+
     const videoRef = ref(storage, `Movievideo/${videoUpload.name + v4()}`);
     const ImgRef = ref(storage, `Movieimage/${imageUpload.name + v4()}`);
 
@@ -93,18 +191,29 @@ const Addmovie = () => {
         return axios.post("http://localhost/cinehub/movies/postmovies.php", {
           ...data,
           image: imageUrl,
-          url:videoURL,
+          url: videoURL,
           duration: `${duration?.hour}:${duration?.minutes}`,
         });
-      }) .then((res) => {
+      })
+      .then((res) => {
         alert("Success!");
-        setSubmitBtn(false)
-        alert(res.data.status)
+        setPostingButton(false);
+        alert(res.data.status);
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error:", error.message);
       });
     // console.log(data);
+  };
+
+  const [selectedDate, setSelectedDate] = useState("");
+
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split("T")[0];
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
   };
 
   return (
@@ -117,24 +226,34 @@ const Addmovie = () => {
             marginTop: "20px",
           }}
         >
-          <span>Add Movies form box !</span>
-          {submitBtn && message}
+          <span style={{ fontWeight: "bold" }}>Add Movies form box !</span>
         </div>
 
         <div className="addmoviesform_box">
-          <form onSubmit={handleSubmit}>
+          <form
+            style={{
+              fontSize: "15px",
+              fontFamily: "cursive",
+              marginTop: "20px",
+            }}
+            onSubmit={handleSubmit}
+          >
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">
                 Name
               </label>
               <input
-                onChange={(e) => setData({ ...data, name: e.target.value })}
+                onChange={handleName}
                 style={{ width: "200px" }}
                 type="text"
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
               />
+            </div>
+            <div style={{ color: "red" }}>
+              {" "}
+              {nameError && "Please fil the name !"}{" "}
             </div>
 
             <div
@@ -144,13 +263,11 @@ const Addmovie = () => {
               <label for="exampleInputEmail1" class="form-label">
                 Description
               </label>
-              <textarea
-                onChange={(e) =>
-                  setData({ ...data, description: e.target.value })
-                }
-                name=""
-                id=""
-              ></textarea>
+              <textarea onChange={handleDescription} name="" id=""></textarea>
+            </div>
+            <div style={{ color: "red" }}>
+              {" "}
+              {descriptionError && "Please fill the description !"}{" "}
             </div>
 
             <div class="mb-3">
@@ -162,12 +279,15 @@ const Addmovie = () => {
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                onChange={(e) =>{
-                  console.log(e.target.files[0])
-                  setVideoUpload(e.target.files[0])
-                  alert("Video hallyo hai")
+                onChange={(e) => {
+                  setUrlError(false);
+                  setVideoUpload(e.target.files[0]);
+                 
                 }}
               />
+            </div>
+            <div style={{ color: "red" }}>
+              {urlError && "PLease upload  the video !!"}
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">
@@ -178,45 +298,106 @@ const Addmovie = () => {
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                onChange={(e) => setImageUpload(e.target.files[0])}
+                onChange={(e) => {
+                  setImageError(false);
+                  setImageUpload(e.target.files[0]);
+                  
+                }}
               />
+            </div>
+            <div style={{ color: "red" }}>
+              {imageError && "PLease upload  image !!"}
             </div>
 
             <div>
-              <div style={{ color: "red" }}>{error.hourErr}</div>
-              <label htmlFor="">hour</label>
-              <input type="number" onChange={handleHour} name="hour" id="" />
-              <div style={{ color: "red" }}>{error.minuteErr}</div>
-              <label htmlFor="">minutes</label>
+              <label style={{ marginRight: "45px" }} htmlFor="">
+                Hour
+              </label>
               <input
+                style={{
+                  marginBottom: "20px",
+                  width: "70px",
+                  height: "30px",
+                  border: "none",
+                  borderRadius: "5px",
+                  padding: "7px",
+                }}
+                type="number"
+                onChange={handleHour}
+                name="hour"
+                id=""
+              />
+              <div style={{ color: "red" }}>{hourError && "Invalid hour"}</div>
+
+              <label style={{ marginRight: "25px" }} htmlFor="">
+                Minutes
+              </label>
+              <input
+                style={{
+                  width: "70px",
+                  height: "30px",
+                  border: "none",
+                  borderRadius: "5px",
+                  padding: "7px",
+                }}
                 type="number"
                 onChange={handleMinutes}
                 name="minutes"
                 id=""
               />
             </div>
-            <div>
-              <label htmlFor="">Release</label>
-              <input
-                type="date"
-                onChange={(e) =>
-                  setData({ ...data, releasedate: e.target.value })
-                }
-              />
+            <div style={{ color: "red" }}>
+              {minutesError && "Invalid minutes format"}
             </div>
-            <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-              <h3>Choose genre</h3>
-              <div
+
+            <div>
+              <label
+                htmlFor=""
                 style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  gap: "0px",
+                  fontSize: "15px",
+                  fontFamily: "cursive",
+                  marginTop: "20px",
+                  marginRight: "30px",
                 }}
               >
+                Release
+              </label>
+              <input
+                style={{
+                  height: "30px",
+                  border: "none",
+                  borderRadius: "5px",
+                  padding: "7px",
+                }}
+                type="date"
+                id="date-input"
+                onChange={(e) =>{
+                  setReleaseError(false)
+                  setData({ ...data, releasedate: e.target.value })
+                }}
+                max={today} // Set the max attribute to today's date
+              />
+              
+            </div>
+            <div  style={{color:"red"}}>{releaseError && " Please enter release date"}</div>
+
+            <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+              <h3
+                style={{
+                  fontSize: "15px",
+                  fontFamily: "cursive",
+                  marginTop: "20px",
+                  fontWeight: "bold",
+                }}
+              >
+                Choose genre
+              </h3>
+              <div>
                 {genres.map((genre) => (
                   <>
                     <label htmlFor="">{genre}</label>
                     <input
+                      style={{ marginRight: "20px" }}
                       onChange={handleChange}
                       value={genre}
                       type="checkbox"
@@ -225,7 +406,22 @@ const Addmovie = () => {
                 ))}
               </div>
             </div>
-            <button disabled={submitBtn} type="submit" class="btn btn-primary">
+            <div style={{ color: "red" }}>
+              {genreError && "Select atleast one genre"}
+            </div>
+            <button
+              disabled={
+                postingButton ||
+                descriptionError ||
+                nameError ||
+                imageError ||
+                urlError ||
+                hourError ||
+                minutesError
+              }
+              type="submit"
+              class="btn btn-primary"
+            >
               Submit
             </button>
           </form>

@@ -1,0 +1,99 @@
+.admin_home_container{
+    display: flex;
+    height: 100vh;
+    font-family: cursive;
+    flex-direction: row;
+}
+
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #8c7ddf;
+    color: #fff;
+    padding: 20px;
+  
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dce8e7;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 15px 0;
+    color: #ecf0f1;
+    text-decoration: none;
+    border-bottom: 1px solid #c3c7cb;
+}
+
+
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: whitesmoke;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-title h1 {
+    margin: 0;
+}
+
+.header-search input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.movies {
+    margin-top: 20px;
+}
+
+.movies h2 {
+    margin: 0 0 20px 0;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #8c7ddf;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+    min-height: 20rem;
+
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.movie-card h3 {
+    margin: 0 0 10px 0;
+}
+
+.movie-card p {
+    margin: 0;
+    color: #7f8c8d;
+}

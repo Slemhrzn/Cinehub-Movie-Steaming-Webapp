@@ -49,16 +49,7 @@ const NavBar = () => {
       >
         Movies
       </div>
-      <div
-        style={{
-          border: "2px solid white",
-          borderRadius: "10px",
-          backgroundColor: "#cec0f5",
-          padding: "5px 20px  ",
-        }}
-      >
-        Genres
-      </div>
+     
      {  <div
         style={{
           border: "2px solid white",

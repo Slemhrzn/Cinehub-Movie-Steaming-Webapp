@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./AdminManageMovie.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 import Adminnavbar from "../components/Adminnavbar";
 
 const AdminManageMovie = () => {
   const [movies, setMovies] = useState([]);
 
-const[reload,setReload]=useState(1)
+  const [reload, setReload] = useState(1);
 
   useEffect(() => {
     axios
@@ -16,15 +18,15 @@ const[reload,setReload]=useState(1)
         setMovies(response.data);
       });
   }, [reload]);
-  
-    console.log(reload)
+
+  console.log(reload);
 
   const handleDelete = (id) => {
     axios
       .delete(`http://localhost/cinehub/movies/deletemovie.php?id=${id}`)
       .then((response) => {
         // setMovies(movies.filter());
-        setReload(reload + 1)  
+        setReload(reload + 1);
       })
       .catch((error) => {
         console.error("There was an error deleting the movie!", error);
@@ -33,54 +35,42 @@ const[reload,setReload]=useState(1)
 
   return (
     <div className="admin_container">
-      <Adminnavbar/>
-      
-      <div className="adminaddmovie">
-          <Link to="/admin/addmovies">
-            <button
-              style={{
-                border: "2px solid white",
-                padding: "5px",
-                borderRadius: "10px",
-                width: "70px",
-                fontFamily:"cursive",
-                backgroundColor:"#cec0f5"
-                
+      <Adminnavbar />
 
-              }}
-            >
-              Add
-            </button>
-          </Link>
-        </div>
-
-      <table className="table" style={{ height:"80%", width:"70%", marginTop:"7rem", backgroundColor:"whitesmoke" }}>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Action</th>
+<div > <Link to={"/admin/addmovies"}><button className="addmovies-button" >Add</button></Link></div>
+ <table class="addmovies-table">
+        <thead>
+        <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {movies.map((movie,i) => (
+              <tr key={movie.id}>
+                <td>{i+1}</td>
+                <td>{movie.name}</td>
+                <td>
+                  {JSON.parse(movie.genre).map((genre) => (
+                    <span style={{ marginRight: "10px" }}>| {genre} |</span>
+                  ))}
+                </td>
+                <td style={{
+                  display:"flex",
+                  gap:"1rem",
+                  alignItems:"center"
+                }}>
+                  <div><FaEdit size={20} /></div>
+                  <div onClick={() => handleDelete(movie.id)}><MdDeleteForever  size={25}/></div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {movies.map((movie) => (
-                <tr key={movie.id}>
-                  <td>{movie.id}</td>
-                  <td>{movie.name}</td>
-                  <td>{movie.genre}</td>
-                  <td>
-                    <button>edit</button>
-                    <button onClick={() => handleDelete(movie.id)}>delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+        </tbody>
+    </table>
 
-     
-      
-    </div>
+      </div>
   );
 };
 

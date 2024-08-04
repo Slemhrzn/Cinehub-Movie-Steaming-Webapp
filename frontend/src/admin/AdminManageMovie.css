@@ -1,24 +1,78 @@
-
-.admin_container{
-   
-    height: 100vh;
-    width: 100vw;
-    background-color: rgb(200, 200, 239);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.admin_container {
+  width: 100vw;
+  background-color: rgb(200, 200, 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 3rem;
+  min-height: 100vh;
+  max-height: 100%;
 }
 
-.adminaddmovie{
-
+.addmovies-button {
     position: absolute;
-    top: 9rem;
-    right: 12rem;
+    right: 9rem;
+    top: 7rem;
+    border-radius: 10px;
+    border: 2px solid whitesmoke;
+    padding:  5px 20px  ;
+    font-family: cursive;
+    background-color: #cec0f5;
+    
+   
+  
 }
 
+.addmovies-table {
+  margin-top: 9rem;
+  width: 80%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
 
+.addmovies-table th,
+.addmovies-table td {
+  padding: 15px;
+  text-align: left;
+}
 
+.addmovies-table thead {
+  background-color: #e6e9f2;
+}
 
+.addmovies-table th {
+  font-weight: normal;
+  color: #6b7280;
+}
 
+.addmovies-table tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
 
+.addmovies-tabletbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.status.open {
+  background-color: #4caf50;
+}
+
+.status.paid {
+  background-color: #2196f3;
+}
+
+.status.inactive {
+  background-color: #9e9e9e;
+}

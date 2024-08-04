@@ -1,15 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Adminnavbar.css";
 import { FaUserCircle } from "react-icons/fa";
 
 const Adminnavbar = () => {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    let userResponse = confirm("Do you want to log out?");
+    if (userResponse) {
+      localStorage.removeItem("user");
+      navigate("/");
+    } else {
+      console.log("Logout cancelled.");
+    }
+  }
+
   return (
     <div className="adminnavbar_container">
-      <Link
-        to="/admin"
-        style={{ color: "black", textDecoration: "none" }}
-      >
+      <Link to="/admin" style={{ color: "black", textDecoration: "none" }}>
         <div
           style={{
             border: "2px solid white",
@@ -37,7 +46,7 @@ const Adminnavbar = () => {
         </div>
       </Link>
 
-      <div>
+      <div style={{ cursor: "pointer" }} onClick={handleLogout}>
         <FaUserCircle size={30} color="white" />
       </div>
     </div>
