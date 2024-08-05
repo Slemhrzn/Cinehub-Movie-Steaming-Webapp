@@ -40,20 +40,18 @@ const Carousel = ({ movie }) => {
                   color: "black",
                   zIndex: "50",
                   border: "1px",
-                  backgroundColor:"rgba(255, 255, 255, 0.5)",
-                  width:"70%",
-                  left:"10rem",
-                  borderRadius:"10px",
-                  padding:"20px",
-                  fontFamily:"cursive"
+                  backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  width: "70%",
+                  left: "10rem",
+                  borderRadius: "10px",
+                  padding: "20px",
+                  fontFamily: "cursive",
                 }}
               >
                 <div
                   style={{
                     fontSize: "22px",
                     fontWeight: "bold",
-                   
-
                   }}
                 >
                   {movie.name}

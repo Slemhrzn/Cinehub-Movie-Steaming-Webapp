@@ -14,6 +14,7 @@ import Movie from './pages/viewmovie/Movie'
 import Adminnavbar from './components/Adminnavbar'
 import NavBar from './components/NavBar'
 import Checkbox from './Checkbox'
+// import AllMovies from './pages/home/AllMovies'
 
 
 function App() {
@@ -58,7 +59,11 @@ function App() {
     {
       path:"/checkbox",
       element:<Checkbox/>
-    }
+    },
+    // {
+    //   path:"/allmovies",
+    //   element:<AllMovies/>
+    // }
     
    
 

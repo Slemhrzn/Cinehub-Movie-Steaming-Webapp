@@ -15,19 +15,17 @@ const Addmovie = () => {
   const [hourError, setHourError] = useState(false);
   const [minutesError, setMinutesError] = useState(false);
   const [postingButton, setPostingButton] = useState(false);
-  const [releaseError,setReleaseError] = useState(false);
+  const [releaseError, setReleaseError] = useState(false);
 
-
-  console.log(nameError);
-  console.log(descriptionError);
-  console.log(imageError);
-  console.log(urlError);
-  console.log(genreError);
-  console.log(hourError);
-  console.log(minutesError);
-  console.log(postingButton);
-  console.log(releaseError);
-
+  // console.log(nameError);
+  // console.log(descriptionError);
+  // console.log(imageError);
+  // console.log(urlError);
+  // console.log(genreError);
+  // console.log(hourError);
+  // console.log(minutesError);
+  // console.log(postingButton);
+  // console.log(releaseError);
 
   const [data, setData] = useState({
     name: "",
@@ -54,7 +52,7 @@ const Addmovie = () => {
     "Action",
     "Romantic",
     "Drama",
-    "Horror"
+    "Horror",
   ]);
 
   const [duration, setDuration] = useState({
@@ -68,12 +66,8 @@ const Addmovie = () => {
     const { checked, value } = e.target;
     // console.log(value);
     if (checked) {
-      setGenreError(false);
-
       setData({ ...data, genre: [...data?.genre, value] });
     } else {
-      setGenreError(true);
-
       setData({ ...data, genre: data.genre.filter((i) => i !== value) });
     }
   };
@@ -161,12 +155,11 @@ const Addmovie = () => {
       return;
     }
 
-    if(data.releasedate <= 0){
+    if (data.releasedate <= 0) {
       setPostingButton(false);
-      setReleaseError(true)
-      return
+      setReleaseError(true);
+      return;
     }
-
 
     if (data?.genre?.length == 0) {
       setPostingButton(false);
@@ -238,15 +231,15 @@ const Addmovie = () => {
             }}
             onSubmit={handleSubmit}
           >
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">
+            <div className="mb-3">
+              <label for="exampleInputEmail1" className="form-label">
                 Name
               </label>
               <input
                 onChange={handleName}
                 style={{ width: "200px" }}
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
               />
@@ -257,10 +250,10 @@ const Addmovie = () => {
             </div>
 
             <div
-              class="mb-3"
+              className="mb-3"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <label for="exampleInputEmail1" class="form-label">
+              <label for="exampleInputEmail1" className="form-label">
                 Description
               </label>
               <textarea onChange={handleDescription} name="" id=""></textarea>
@@ -270,37 +263,64 @@ const Addmovie = () => {
               {descriptionError && "Please fill the description !"}{" "}
             </div>
 
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">
-                URL
+            <div className="mb-3">
+              <label for="exampleInputEmail1" className="form-label">
+                Video
               </label>
               <input
                 type="file"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  setUrlError(false);
-                  setVideoUpload(e.target.files[0]);
-                 
+                  const allowExtention = [
+                    "mp4"
+                  ]
+                  const extention = e.target.files[0].name.split(".").pop();
+                  console.log(extention);
+                  if(allowExtention.includes(extention)){
+                    setUrlError(false);
+                    alert("valid file extention")
+                    setVideoUpload(e.target.files[0]);
+                  }else{
+                    alert("Invalid file extention")
+                    setVideoUpload(null)
+                    setUrlError(true);
+                  }
                 }}
               />
             </div>
             <div style={{ color: "red" }}>
               {urlError && "PLease upload  the video !!"}
             </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">
+            <div className="mb-3">
+              <label for="exampleInputEmail1" className="form-label">
                 Image
               </label>
               <input
                 type="file"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  setImageError(false);
-                  setImageUpload(e.target.files[0]);
+                  const allowExtention = [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "jfif"
+                  ]
+                  const extention = e.target.files[0].name.split(".").pop();
+                  console.log(extention);
+                  if(allowExtention.includes(extention)){
+                    alert("valid file extention")
+                    setImageError(false);
+                    setImageUpload(e.target.files[0]);
+                  }else{
+                    alert("Invalid file extention")
+                    setImageError(true);
+                  setImageUpload(null);
+                  }
                   
                 }}
               />
@@ -371,15 +391,16 @@ const Addmovie = () => {
                 }}
                 type="date"
                 id="date-input"
-                onChange={(e) =>{
-                  setReleaseError(false)
-                  setData({ ...data, releasedate: e.target.value })
+                onChange={(e) => {
+                  setReleaseError(false);
+                  setData({ ...data, releasedate: e.target.value });
                 }}
                 max={today} // Set the max attribute to today's date
               />
-              
             </div>
-            <div  style={{color:"red"}}>{releaseError && " Please enter release date"}</div>
+            <div style={{ color: "red" }}>
+              {releaseError && " Please enter release date"}
+            </div>
 
             <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
               <h3
@@ -420,7 +441,7 @@ const Addmovie = () => {
                 minutesError
               }
               type="submit"
-              class="btn btn-primary"
+              className="btn btn-primary"
             >
               Submit
             </button>

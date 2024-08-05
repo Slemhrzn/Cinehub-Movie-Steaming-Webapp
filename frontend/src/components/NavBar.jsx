@@ -39,16 +39,19 @@ const NavBar = () => {
           Home
         </div>
       </Link>
-      <div
-        style={{
-          border: "2px solid white",
-          borderRadius: "10px",
-          backgroundColor: "#cec0f5",
-          padding: "5px 20px  ",
-        }}
-      >
-        Movies
-      </div>
+
+      {/* <Link to="/allmovies"> */}
+        <div
+          style={{
+            border: "2px solid white",
+            borderRadius: "10px",
+            backgroundColor: "#cec0f5",
+            padding: "5px 20px  ",
+          }}
+        >
+          Movies
+        </div>
+      {/* </Link> */}
      
      {  <div
         style={{

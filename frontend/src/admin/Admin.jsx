@@ -34,6 +34,7 @@ const Admindashboard = () => {
       alert("Logout cancelled.");
     }
   }
+
   return (
     <div className="admin_home_container">
       {/* <Adminnavbar/> */}
@@ -44,11 +45,13 @@ const Admindashboard = () => {
         </div>
         <nav className="sidebar-nav">
           <Link to="/admin" className="active">
-            Dashboard  <BiSolidDashboard  size={25}/>
+            Dashboard <BiSolidDashboard size={25} />
           </Link>
-          <Link to="/admin/managemovie">Manage Movie  <MdManageAccounts size={25} /></Link>
+          <Link to="/admin/managemovie">
+            Manage Movie <MdManageAccounts size={25} />
+          </Link>
           <div style={{ cursor: "pointer" }} onClick={handleLogout}>
-            Log out  <IoLogOut size={25}/>
+            Log out <IoLogOut size={25} />
           </div>
         </nav>
       </aside>
@@ -65,13 +68,26 @@ const Admindashboard = () => {
           <div className="movies-grid">
             {movies.map((movies) => {
               return (
-                <Link  style={{textDecoration:"none"}} to={"/viewmovie/"+movies.id}>
-                  <div  className="movie-card">
-                    <img width="300px" height="150px" style={{objectFit:"cover"}} src={movies.image} alt="Movie Title" />
-                    <h5 style={{color:"black",fontFamily:"cursive"}} >{movies.name}</h5>
-                    <p style={{color:"black",fontFamily:"cursive"}}>{JSON.parse(movies.genre).map((i)=>{
-                      return <li>{i}</li>
-                    })}</p>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={"/viewmovie/" + movies.id}
+                >
+                  <div className="movie-card">
+                    <img
+                      width="300px"
+                      height="150px"
+                      style={{ objectFit: "cover" }}
+                      src={movies.image}
+                      alt="Movie Title"
+                    />
+                    <h5 style={{ color: "black", fontFamily: "cursive" }}>
+                      {movies.name}
+                    </h5>
+                    <p style={{ color: "black", fontFamily: "cursive" }}>
+                      {JSON.parse(movies.genre).map((i) => {
+                        return <li>{i}</li>;
+                      })}
+                    </p>
                   </div>
                 </Link>
               );
