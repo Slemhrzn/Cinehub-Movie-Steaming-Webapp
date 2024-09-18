@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from "react";
 import "./Homepage.css";
 import NavBar from "../../components/NavBar";
-import Carousel from "../../components/Carousel";
+import CarouselShow from "../../components/Carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
-  const [movie, setMovie] = useState([]); //for storing and  displaying data
-  console.log(movie);
+  const [movie, setMovie] = useState([]); // for storing and displaying data
+  const [searchedMovie, setSearchedMovie] = useState([]); // for storing searched movies
+  
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     axios
       .get("http://localhost/cinehub/movies/getmovies.php")
       .then((response) => {
-        //console.log(response.data);
         setMovie(response?.data);
+        setSearchedMovie(response?.data); // Initially set searchedMovie to the full movie list
       });
   }, []);
+
+  const searchedMovies = (search) => {
+    // console.log(search);
+    // Convert both the movie name and the search term to lowercase for case-insensitive matching
+    const filteredMovies = movie.filter((i) =>
+      i.name.toLowerCase().includes(search.toLowerCase())
+    );
+    // console.log(filteredMovies);
+    setSearchedMovie(filteredMovies); // Update the searchedMovie list based on the search
+  };
 
   return (
     <div className="homepage_container">
       <div className="homepage_box">
-        <NavBar />
+        <NavBar  searchedMovies={searchedMovies} />
         <div>
-          <Carousel movie={movie} />
+          <CarouselShow movie={searchedMovie} />
         </div>
 
         <div
@@ -70,10 +81,10 @@ const Homepage = () => {
             flexWrap: "wrap",
           }}
         >
-          {movie.length > 0 &&
-            movie?.map((movie) => (
-              <div class="card">
-                <div class="card_background">
+          {searchedMovie.length > 0 &&
+            searchedMovie.map((movie) => (
+              <div className="card" key={movie.id}>
+                <div className="card_background">
                   <div
                     style={{
                       height: "170px",
@@ -89,6 +100,7 @@ const Homepage = () => {
                         objectFit: "contain",
                       }}
                       src={movie?.image}
+                      alt={movie.name}
                     />
                   </div>
 
@@ -115,7 +127,7 @@ const Homepage = () => {
                               fontFamily: "cursive",
                             }}
                           >
-                            watch
+                            Watch
                           </button>
                         </Link>
                       </div>

@@ -1,105 +1,75 @@
 import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
-const Carousel = ({ movie }) => {
+const CarouselShow = ({ movie }) => {
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
-    <div className="carousel_box">
-      <div id="carouselExampleIndicators" className="carousel slide">
-        <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div className="carousel-inner" style={{ height: "22rem" }}>
-          {movie.map((movie, i) => (
+    <Carousel responsive={responsive}>
+      {movie.slice(0,5).map((movie, i) => (
+        <div
+          key={i}
+          className="carousel-item active"
+          style={{ width: "100%", height: "60vh" }} // Set container height to 60vh
+        >
+          <div
+            style={{
+              position: "absolute",
+              bottom: "2rem", // Adjust positioning as needed
+              color: "black",
+              zIndex: "50",
+              border: "1px",
+              backgroundColor: "rgba(255, 255, 255, 0.5)",
+              width: "60%", // Adjust the width of the content box
+              left: "2rem", // Adjust positioning of content box
+              borderRadius: "10px",
+              padding: "15px", // Adjust padding for better fit
+              fontFamily: "cursive",
+            }}
+          >
             <div
-              key={i}
-              className="carousel-item active"
-              style={{ width: "100%", height: "100%" }}
+              style={{
+                fontSize: "22px",
+                fontWeight: "bold",
+              }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "3rem",
-                  color: "black",
-                  zIndex: "50",
-                  border: "1px",
-                  backgroundColor: "rgba(255, 255, 255, 0.5)",
-                  width: "70%",
-                  left: "10rem",
-                  borderRadius: "10px",
-                  padding: "20px",
-                  fontFamily: "cursive",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "22px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {movie.name}
-                </div>
-                <div>{movie.description}</div>
-                <div></div>
-              </div>
-              <img
-                src={movie?.image}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  opacity: "90%",
-                }}
-                className="d-block w-100"
-                alt="..."
-              />
+              {movie.name}
             </div>
-          ))}
+            <div>{movie.description}</div>
+          </div>
+          <img
+            src={movie?.image}
+            style={{
+              width: "100%", // Full width
+              height: "60vh", // Set image height to 60% of viewport height
+              objectFit: "contain", // Ensure the image fits within the box without stretching
+              opacity: "90%",
+            }}
+            className="d-block w-100"
+            alt="..."
+          />
         </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
+      ))}
+    </Carousel>
   );
 };
 
-export default Carousel;
+export default CarouselShow;

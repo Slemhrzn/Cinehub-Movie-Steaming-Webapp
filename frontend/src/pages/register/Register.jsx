@@ -7,8 +7,8 @@ import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
-  const[emailError,setEmailError] = useState(false)
-  const[passwordError,setPasswordError]=useState(false)
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -21,45 +21,40 @@ const Register = () => {
     let email = e.target.value;
     if (validEmail(email)) {
       setData({ ...data, email: email });
-      setEmailError(false);  // Clear error if the email is valid
+      setEmailError(false); // Clear error if the email is valid
     } else {
-      setEmailError(true);  // Set error if the email is invalid
+      setEmailError(true); // Set error if the email is invalid
     }
-    if (email.length === 0) {  // Clear error if the input is empty
+    if (email.length === 0) {
+      // Clear error if the input is empty
       setEmailError(false);
     }
   }
-  
+
   function validEmail(email) {
     var reg = /^[a-zA-Z0-9_.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
     return reg.test(email);
   }
 
-
-  function handlePassword(e){
-    let password=e.target.value;
-    if(validPasword(password)){
+  function handlePassword(e) {
+    let password = e.target.value;
+    if (validPasword(password)) {
       setData({ ...data, password: password });
       setPasswordError(false);
-    }else{
+    } else {
       setPasswordError(true);
     }
-      if(password.length==0){
-        setPasswordError(false);
-      }
+    if (password.length == 0) {
+      setPasswordError(false);
     }
-  function validPasword(password){
-    if(password.length >= 6){
-      return true
-
-    }else{
-        return false
+  }
+  function validPasword(password) {
+    if (password.length >= 6) {
+      return true;
+    } else {
+      return false;
     }
-
-    }
-
-  
-  
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,8 +79,6 @@ const Register = () => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
-                marginBottom: "20px",
               }}
             >
               <h2 style={{ fontFamily: "'Lobster', cursive" }}>Register</h2>
@@ -124,6 +117,7 @@ const Register = () => {
                     className="register_input"
                     onChange={(e) => setData({ ...data, name: e.target.value })}
                     type="text"
+                    required
                   />
                 </div>
 
@@ -137,7 +131,7 @@ const Register = () => {
                     }}
                     htmlFor=""
                   >
-                    Email 
+                    Email
                   </label>
 
                   <input
@@ -149,6 +143,7 @@ const Register = () => {
                     className="register_input"
                     onChange={handleEmail}
                     type="text"
+                    required
                   />
                 </div>
 
@@ -172,38 +167,60 @@ const Register = () => {
                     }}
                     className="register_input"
                     type="password"
-                    onChange={handlePassword }
+                    onChange={handlePassword}
+                    required
                   />
                 </div>
+                <hr style={{background:"black",border:"none",height:"2px", marginRight:"1rem"  }} />
 
+                <label
+                  style={{
+                    fontFamily: "'Lobster', cursive",
+                    fontSize: "15px",
+                    color: "black",
+                  }}
+                  htmlFor=""
+                >
+                  <span style={{ fontWeight: "bold" }}>
+                    Recover Password-Hint:
+                  </span>
+                  <br />
+                  <span>Your Favorite Color:</span>
+                </label>
+                <input
+                  style={{
+                    width: "150px",
+                    height: "35px",
+                    fontFamily: "'Lobster', cursive",
+                  }}
+                  className="register_input"
+                  type="password"
+                  onChange={handlePassword}
+                  required
+                />
+                <hr style={{background:"black",border:"none",height:"2px", marginRight:"1rem"  }} />
                 <div
                   style={{
                     transform: "translate(130px)",
                   }}
                 >
                   <button
-                  disabled={emailError}
+                    disabled={emailError}
                     type="submit"
                     style={{ fontFamily: "'Lobster', cursive" }}
                     className="register_button"
                   >
-                    Register  
+                    Register
                   </button>
-                  
                 </div>
-                <div style={{color:"red",fontFamily:"cursive"}}>
-                {emailError && " Invalid email !! Please try again" }
-                
+                <div style={{ color: "red", fontFamily: "cursive" }}>
+                  {emailError && " Invalid email !! Please try again"}
                 </div>
-               <div   style={{color:"red" ,fontFamily:"cursive"}}>
-               {passwordError && " Invalid password!! Please try again" }
-               </div>
-
-
-                
+                <div style={{ color: "red", fontFamily: "cursive" }}>
+                  {passwordError && " Invalid password!! Please try again"}
+                </div>
 
                 <div>
-                
                   <div
                     style={{
                       color: "black",
@@ -214,7 +231,7 @@ const Register = () => {
                     }}
                   >
                     Already have an account?{" "}
-                    <Link style={{ color: "black"}} to="/">
+                    <Link style={{ color: "black" }} to="/">
                       Login
                     </Link>
                   </div>
