@@ -21,17 +21,20 @@ const AdminManageMovie = () => {
   console.log(reload);
 
   const handleDelete = (id) => {
-
-    
-    axios
-      .delete(`http://localhost/cinehub/movies/deletemovie.php?id=${id}`)
-      .then((response) => {
-        // setMovies(movies.filter());
-        setReload(reload + 1);
-      })
-      .catch((error) => {
-        console.error("There was an error deleting the movie!", error);
-      });
+    const res = confirm("Are you sure you want to delete?");
+    if (res) {
+      axios
+        .delete(`http://localhost/cinehub/movies/deletemovie.php?id=${id}`)
+        .then((response) => {
+          // setMovies(movies.filter());
+          setReload(reload + 1);
+        })
+        .catch((error) => {
+          console.error("There was an error deleting the movie!", error);
+        });
+    } else {
+      return;
+    }
   };
 
   return (
@@ -71,7 +74,9 @@ const AdminManageMovie = () => {
                 }}
               >
                 <div>
-                  <FaEdit size={20} />
+                  <Link to={`/editMovie/${movie.id}`}>
+                    <FaEdit size={20} />
+                  </Link>
                 </div>
                 <div onClick={() => handleDelete(movie.id)}>
                   <MdDeleteForever size={25} />

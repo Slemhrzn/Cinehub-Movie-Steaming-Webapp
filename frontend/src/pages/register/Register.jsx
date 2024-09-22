@@ -9,11 +9,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const[hintError,setHintError]= useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     role: "USER",
+    hint:""
   });
 
   console.log(data);
@@ -54,6 +56,44 @@ const Register = () => {
     } else {
       return false;
     }
+  }
+
+  
+
+  function handleHint(e){
+      const hint = e.target.value.toLowerCase();
+      // console.log(hint)
+      if(hint.length >= 3 && validHint(hint) && validColor(hint))
+      {
+        setData({...data,hint:hint})
+        setHintError(false);
+      }
+      else{
+        setHintError(true);
+      }
+  }
+  function validHint(hint){
+     const valid= /^[a-zA-Z]+$/;
+     return valid.test(hint); //valid -> return true else false
+  }
+
+  function validColor(hint){
+    const validHint = [
+      "black",
+      "blue",
+      "green",
+      "red",
+      "yellow",
+      "purple",
+      "brown",
+      "white",
+      "grey",
+      "pink",
+      "orange",
+      "lavender"
+    ]
+    var result = validHint.includes(hint)
+    return result
   }
 
   const handleSubmit = (e) => {
@@ -194,8 +234,8 @@ const Register = () => {
                     fontFamily: "'Lobster', cursive",
                   }}
                   className="register_input"
-                  type="password"
-                  onChange={handlePassword}
+                  type="text"
+                  onChange={handleHint}
                   required
                 />
                 <hr style={{background:"black",border:"none",height:"2px", marginRight:"1rem"  }} />
@@ -220,11 +260,15 @@ const Register = () => {
                   {passwordError && " Invalid password!! Please try again"}
                 </div>
 
+                <div style={{ color: "red", fontFamily: "cursive" }}>
+                  {hintError && " Invalid hint!! Please try again"}
+                </div>
+
                 <div>
                   <div
                     style={{
                       color: "black",
-                      marginTop: "20px",
+                     
                       fontFamily: "'Lobster', cursive",
                       fontSize: "12px",
                       marginBottom: "20px",

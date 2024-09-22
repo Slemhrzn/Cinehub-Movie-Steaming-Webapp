@@ -1,0 +1,22 @@
+.bookmark_container{
+    height:auto;
+    width: 100%;
+    background-color: rgb(200, 200, 239);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+
+.bookmark_box{
+    height: 90%;
+    width: 90%;
+    padding: 1rem 2rem;
+    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+ 
+  

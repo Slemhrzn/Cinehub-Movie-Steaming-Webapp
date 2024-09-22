@@ -60,7 +60,7 @@ const NavBar = ({ searchedMovies }) => {
             padding: "5px 20px  ",
           }}
         >
-          My bookmarks
+          <Link to="/bookmark"  style={{ color: "black", textDecoration: "none" }}>My bookmarks</Link>
         </div>
       }
       <div onClick={handleLogout}>

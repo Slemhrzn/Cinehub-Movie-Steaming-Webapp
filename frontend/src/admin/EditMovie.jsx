@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Addmovies.css";
 import { useState } from "react";
 import axios from "axios";
@@ -6,7 +6,41 @@ import { storage } from "../firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { ProgressBar } from "react-loader-spinner";
-const Addmovie = () => {
+import { useParams } from "react-router-dom";
+const EditMovie = () => {
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    url: "",
+    image: "",
+    duration: "",
+    releasedate: "",
+    genre: [],
+  });
+  console.log(data);
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost/cinehub/movies/getmoviesbyId.php?id=${id}`)
+      .then((res) => {
+        console.log(res.data.message);
+        setData({
+          name: res.data.message.name,
+          description: res.data.message.description,
+          url: res.data.message.url,
+          image: res.data.message.image,
+          duration: res.data.message.duration,
+          releasedate: res.data.message.releasedate,
+          genre: JSON.parse(res.data.message.genre),
+        });
+      });
+  }, []);
+
+  console.log(data?.genre);
+  //   console.log(JSON.parse(data.genre))
+
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -26,16 +60,6 @@ const Addmovie = () => {
   // console.log(minutesError);
   // console.log(postingButton);
   // console.log(releaseError);
-
-  const [data, setData] = useState({
-    name: "",
-    description: "",
-    url: "",
-    image: "",
-    duration: "",
-    releasedate: "",
-    genre: [],
-  });
 
   const [imageUpload, setImageUpload] = useState(null);
   const [videoUpload, setVideoUpload] = useState(null);
@@ -71,7 +95,6 @@ const Addmovie = () => {
       setData({ ...data, genre: data.genre.filter((i) => i !== value) });
     }
   };
-  // console.log(data.genre);
 
   function handleHour(e) {
     const value = Number.parseInt(e.target.value);
@@ -118,7 +141,7 @@ const Addmovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Submiting")
+    alert("Submiting");
     setPostingButton(true);
     if (data.name.length <= 0) {
       setNameError(true);
@@ -243,6 +266,7 @@ const Addmovie = () => {
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
+                value={data.name}
               />
             </div>
             <div style={{ color: "red" }}>
@@ -257,7 +281,12 @@ const Addmovie = () => {
               <label for="exampleInputEmail1" className="form-label">
                 Description
               </label>
-              <textarea onChange={handleDescription} name="" id=""></textarea>
+              <textarea
+                value={data.description}
+                onChange={handleDescription}
+                name=""
+                id=""
+              ></textarea>
             </div>
             <div style={{ color: "red" }}>
               {" "}
@@ -274,18 +303,16 @@ const Addmovie = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  const allowExtention = [
-                    "mp4"
-                  ]
+                  const allowExtention = ["mp4"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if(allowExtention.includes(extention)){
+                  if (allowExtention.includes(extention)) {
                     setUrlError(false);
-                    alert("valid file extention")
+                    alert("valid file extention");
                     setVideoUpload(e.target.files[0]);
-                  }else{
-                    alert("Invalid file extention")
-                    setVideoUpload(null)
+                  } else {
+                    alert("Invalid file extention");
+                    setVideoUpload(null);
                     setUrlError(true);
                   }
                 }}
@@ -304,25 +331,18 @@ const Addmovie = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  const allowExtention = [
-                    "png",
-                    "jpg",
-                    "jpeg",
-                    "gif",
-                    "jfif"
-                  ]
+                  const allowExtention = ["png", "jpg", "jpeg", "gif", "jfif"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if(allowExtention.includes(extention)){
-                    alert("valid file extention")
+                  if (allowExtention.includes(extention)) {
+                    alert("valid file extention");
                     setImageError(false);
                     setImageUpload(e.target.files[0]);
-                  }else{
-                    alert("Invalid file extention")
+                  } else {
+                    alert("Invalid file extention");
                     setImageError(true);
-                  setImageUpload(null);
+                    setImageUpload(null);
                   }
-                  
                 }}
               />
             </div>
@@ -347,6 +367,7 @@ const Addmovie = () => {
                 onChange={handleHour}
                 name="hour"
                 id=""
+                placeholder={data.duration.split(":")[0]}
               />
               <div style={{ color: "red" }}>{hourError && "Invalid hour"}</div>
 
@@ -365,6 +386,7 @@ const Addmovie = () => {
                 onChange={handleMinutes}
                 name="minutes"
                 id=""
+                placeholder={data.duration.split(":")[1]}
               />
             </div>
             <div style={{ color: "red" }}>
@@ -392,6 +414,7 @@ const Addmovie = () => {
                 }}
                 type="date"
                 id="date-input"
+                value={data.releasedate}
                 onChange={(e) => {
                   setReleaseError(false);
                   setData({ ...data, releasedate: e.target.value });
@@ -421,8 +444,9 @@ const Addmovie = () => {
                     <input
                       style={{ marginRight: "20px" }}
                       onChange={handleChange}
-                      value={genre}
                       type="checkbox"
+                      value={genre} // Add the value attribute here
+                      checked={data.genre.includes(genre)} // Correctly handles checking
                     />
                   </>
                 ))}
@@ -453,4 +477,4 @@ const Addmovie = () => {
   );
 };
 
-export default Addmovie;
+export default EditMovie;

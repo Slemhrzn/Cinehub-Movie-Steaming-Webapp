@@ -5,6 +5,7 @@ import CarouselShow from "../../components/Carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 const Homepage = () => {
   const [movie, setMovie] = useState([]); // for storing and displaying data
   const [searchedMovie, setSearchedMovie] = useState([]); // for storing searched movies
@@ -81,7 +82,7 @@ const Homepage = () => {
             flexWrap: "wrap",
           }}
         >
-          {searchedMovie.length > 0 &&
+          {searchedMovie.length > 0 ?
             searchedMovie.map((movie) => (
               <div className="card" key={movie.id}>
                 <div className="card_background">
@@ -135,7 +136,9 @@ const Homepage = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )):
+            <span style={{fontWeight:"bold",fontFamily:"cursive"}}>No Result Found !</span>
+            }
         </div>
       </div>
     </div>
