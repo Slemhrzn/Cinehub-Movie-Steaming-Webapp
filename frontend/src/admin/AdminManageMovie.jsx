@@ -62,9 +62,9 @@ const AdminManageMovie = () => {
               <td>{i + 1}</td>
               <td>{movie.name}</td>
               <td>
-                {JSON.parse(movie.genre).map((genre) => (
+                {Array.isArray(JSON.parse(movie.genre)) ? JSON.parse(movie.genre).map((genre) => (
                   <span style={{ marginRight: "10px" }}>| {genre} |</span>
-                ))}
+                )):(JSON.parse(movie.genre)) }
               </td>
               <td
                 style={{
@@ -75,11 +75,11 @@ const AdminManageMovie = () => {
               >
                 <div>
                   <Link to={`/editMovie/${movie.id}`}>
-                    <FaEdit size={20} />
+                    <FaEdit size={20}  style={{color:"black"}}/>
                   </Link>
                 </div>
                 <div onClick={() => handleDelete(movie.id)}>
-                  <MdDeleteForever size={25} />
+                  <MdDeleteForever size={25} style={{color:"black"}} />
                 </div>
               </td>
             </tr>

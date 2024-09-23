@@ -84,9 +84,11 @@ const Admindashboard = () => {
                       {movies.name}
                     </h5>
                     <p style={{ color: "black", fontFamily: "cursive" }}>
-                      {JSON.parse(movies.genre).map((i) => {
-                        return <li>{i}</li>;
-                      })}
+                      {Array.isArray(JSON.parse(movies.genre))
+                        ? JSON.parse(movies.genre)?.map((i) => {
+                            return <li>{i}</li>;
+                          })
+                        : JSON.parse(movies.genre)}
                     </p>
                   </div>
                 </Link>

@@ -118,88 +118,110 @@ const Addmovie = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Submiting")
+    alert("Submitting");
     setPostingButton(true);
+  
     if (data.name.length <= 0) {
       setNameError(true);
       setPostingButton(false);
       return;
     }
-
+  
     if (data.description.length < 10) {
       setPostingButton(false);
       setDescriptionError(true);
       return;
     }
-
+  
     if (imageUpload == null) {
       setPostingButton(false);
       setImageError(true);
       return;
     }
+  
     if (videoUpload == null) {
-      // console.log(videoUpload);
       setPostingButton(false);
       setUrlError(true);
       return;
     }
-
-    if (duration.hour <= 0 && duration.hour < 13) {
+  
+    if (duration.hour <= 0 || duration.hour > 12) {
       setHourError(true);
       setPostingButton(false);
       return;
     }
-
-    if (duration.minutes < 0 && duration.minutes > 60) {
+  
+    if (duration.minutes < 0 || duration.minutes >= 60) {
       setPostingButton(false);
       setMinutesError(true);
       return;
     }
-
-    if (data.releasedate <= 0) {
+  
+    if (!data.releasedate) {
       setPostingButton(false);
       setReleaseError(true);
       return;
     }
-
-    if (data?.genre?.length == 0) {
+  
+    if (data.genre.length === 0) {
       setPostingButton(false);
       setGenreError(true);
       return;
     }
-
-    const videoRef = ref(storage, `Movievideo/${videoUpload.name + v4()}`);
-    const ImgRef = ref(storage, `Movieimage/${imageUpload.name + v4()}`);
-
-    Promise.all([
-      uploadBytes(videoRef, videoUpload),
-      uploadBytes(ImgRef, imageUpload),
-    ])
-      .then(([videoSnapshot, imageSnapshot]) => {
+  
+    // Check if the movie exists
+    axios
+      .get(`http://localhost/cinehub/movies/doesMovieExist.php?name=${data.name}`)
+      .then((res) => {
+        if (res.data.message === true) {
+          setPostingButton(false); // Disable the posting button if it already exists
+          alert("Movie already exists");
+          return; // Exit if movie exists
+        }
+  
+        // Movie does not exist, proceed to file upload and database insertion
+        const videoRef = ref(storage, `Movievideo/${videoUpload.name + v4()}`);
+        const ImgRef = ref(storage, `Movieimage/${imageUpload.name + v4()}`);
+  
+        return Promise.all([
+          uploadBytes(videoRef, videoUpload),
+          uploadBytes(ImgRef, imageUpload),
+        ]);
+      })
+      .then((uploadSnapshots) => {
+        if (!uploadSnapshots) return; // Prevent further actions if the movie exists
+  
+        const [videoSnapshot, imageSnapshot] = uploadSnapshots;
+  
         return Promise.all([
           getDownloadURL(videoSnapshot.ref),
           getDownloadURL(imageSnapshot.ref),
         ]);
       })
       .then(([videoURL, imageUrl]) => {
+        if (!videoURL || !imageUrl) return; // Prevent further actions if the movie exists
+  
+        // Now send the final post request to add the movie
         return axios.post("http://localhost/cinehub/movies/postmovies.php", {
           ...data,
           image: imageUrl,
           url: videoURL,
-          duration: `${duration?.hour}:${duration?.minutes}`,
+          duration: `${duration.hour}:${duration.minutes}`,
         });
       })
       .then((res) => {
-        alert("Success!");
-        setPostingButton(false);
-        alert(res.data.status);
-        window.location.reload();
+        if (res) {
+          alert("Success!");
+          setPostingButton(false);
+          window.location.reload();
+        }
       })
       .catch((error) => {
         console.error("Error:", error.message);
+        setPostingButton(false);
       });
-    // console.log(data);
   };
+  
 
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -274,18 +296,16 @@ const Addmovie = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  const allowExtention = [
-                    "mp4"
-                  ]
+                  const allowExtention = ["mp4"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if(allowExtention.includes(extention)){
+                  if (allowExtention.includes(extention)) {
                     setUrlError(false);
-                    alert("valid file extention")
+                    //alert("valid file extention");
                     setVideoUpload(e.target.files[0]);
-                  }else{
-                    alert("Invalid file extention")
-                    setVideoUpload(null)
+                  } else {
+                   // alert("Invalid file extention");
+                    setVideoUpload(null);
                     setUrlError(true);
                   }
                 }}
@@ -304,25 +324,18 @@ const Addmovie = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => {
-                  const allowExtention = [
-                    "png",
-                    "jpg",
-                    "jpeg",
-                    "gif",
-                    "jfif"
-                  ]
+                  const allowExtention = ["png", "jpg", "jpeg", "gif", "jfif"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if(allowExtention.includes(extention)){
-                    alert("valid file extention")
+                  if (allowExtention.includes(extention)) {
+                    alert("valid file extention");
                     setImageError(false);
                     setImageUpload(e.target.files[0]);
-                  }else{
-                    alert("Invalid file extention")
+                  } else {
+                    alert("Invalid file extention");
                     setImageError(true);
-                  setImageUpload(null);
+                    setImageUpload(null);
                   }
-                  
                 }}
               />
             </div>

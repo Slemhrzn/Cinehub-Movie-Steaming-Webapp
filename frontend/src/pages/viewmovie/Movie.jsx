@@ -121,27 +121,31 @@ const Movie = () => {
 
         <div className="viewmovie_right">
           <div style={{ marginTop: "10px" }}>
-            <span style={{ fontSize: "17px", fontWeight: "bold" }}>Duration:</span>
+            <span style={{ fontSize: "17px", fontWeight: "bold" }}>
+              Duration:
+            </span>
             {hour} hour {minute} minutes
           </div>
 
           <div>
             <span style={{ fontSize: "17px", fontWeight: "bold" }}>Genre:</span>
-            {movie.genre.map((g, index) => (
-              <li key={index}>{g}</li>
-            ))}
+            {Array.isArray(movie.genre)
+              ? movie.genre.map((g, index) => <li key={index}>{g}</li>)
+              : ""}
           </div>
 
           <div>
-            <span style={{ fontSize: "17px", fontWeight: "bold" }}>Release:</span>
+            <span style={{ fontSize: "17px", fontWeight: "bold" }}>
+              Release:
+            </span>
             {movie.releasedate}
           </div>
 
           <div onClick={handleBookMark}>
             {isBookMarked ? (
-               <GoBookmarkFill size={25} />
+              <GoBookmarkFill size={25}  />
             ) : (
-              <IoBookmarkOutline  size={25}/>
+              <IoBookmarkOutline size={25} />
             )}
           </div>
         </div>

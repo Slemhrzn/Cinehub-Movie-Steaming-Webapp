@@ -17,9 +17,16 @@ const EditMovie = () => {
     releasedate: "",
     genre: [],
   });
+
+  const [imageUpload, setImageUpload] = useState(null);
+  const [videoUpload, setVideoUpload] = useState(null);
+
   console.log(data);
   const { id } = useParams();
   console.log(id);
+
+  console.log(imageUpload);
+  console.log(videoUpload);
 
   useEffect(() => {
     axios
@@ -38,7 +45,7 @@ const EditMovie = () => {
       });
   }, []);
 
-  console.log(data?.genre);
+  // console.log(data?.genre);
   //   console.log(JSON.parse(data.genre))
 
   const [nameError, setNameError] = useState(false);
@@ -60,9 +67,6 @@ const EditMovie = () => {
   // console.log(minutesError);
   // console.log(postingButton);
   // console.log(releaseError);
-
-  const [imageUpload, setImageUpload] = useState(null);
-  const [videoUpload, setVideoUpload] = useState(null);
 
   // console.log(videoUpload?.name);
   const [error, setError] = useState({
@@ -88,11 +92,14 @@ const EditMovie = () => {
 
   const handleChange = (e) => {
     const { checked, value } = e.target;
-    // console.log(value);
+
+    // Ensure genre is always an array
+    const currentGenres = Array.isArray(data.genre) ? data.genre : [];
+
     if (checked) {
-      setData({ ...data, genre: [...data?.genre, value] });
+      setData({ ...data, genre: [...currentGenres, value] }); // Add the checked genre
     } else {
-      setData({ ...data, genre: data.genre.filter((i) => i !== value) });
+      setData({ ...data, genre: currentGenres.filter((i) => i !== value) }); // Remove the unchecked genre
     }
   };
 
@@ -121,7 +128,8 @@ const EditMovie = () => {
 
   function handleName(e) {
     let name = e.target.value;
-    if (name.length > 0) {
+    console.log(name.length);
+    if (name.length >= 0) {
       setData({ ...data, name: name });
       setNameError(false);
     } else {
@@ -130,97 +138,113 @@ const EditMovie = () => {
   }
 
   function handleDescription(e) {
-    let description = e.target.value;
-    if (description.trim().length > 10) {
-      setData({ ...data, description: description });
-      setDescriptionError(false);
-    } else {
-      setDescriptionError(true);
-    }
+    let des = e.target.value;
+    console.log(des);
+
+    setData({ ...data, description: des });
+    setDescriptionError(false);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Submiting");
     setPostingButton(true);
-    if (data.name.length <= 0) {
-      setNameError(true);
-      setPostingButton(false);
-      return;
-    }
+    // if (data.name.length <= 0) {
+    //   setNameError(true);
+    //   setPostingButton(false);
+    //   return;
+    // }
 
-    if (data.description.length < 10) {
-      setPostingButton(false);
-      setDescriptionError(true);
-      return;
-    }
+    // if (data.description.length < 10) {
+    //   setPostingButton(false);
+    //   setDescriptionError(true);
+    //   return;
+    // }
 
-    if (imageUpload == null) {
-      setPostingButton(false);
-      setImageError(true);
-      return;
-    }
-    if (videoUpload == null) {
-      // console.log(videoUpload);
-      setPostingButton(false);
-      setUrlError(true);
-      return;
-    }
+    // if (imageUpload == null) {
+    //   setPostingButton(false);
+    //   setImageError(true);
+    //   return;
+    // }
+    // if (videoUpload == null) {
+    //   // console.log(videoUpload);
+    //   setPostingButton(false);
+    //   setUrlError(true);
+    //   return;
+    // }
 
-    if (duration.hour <= 0 && duration.hour < 13) {
-      setHourError(true);
-      setPostingButton(false);
-      return;
-    }
+    // if (duration.hour <= 0 && duration.hour < 13) {
+    //   setHourError(true);
+    //   setPostingButton(false);
+    //   return;
+    // }
 
-    if (duration.minutes < 0 && duration.minutes > 60) {
-      setPostingButton(false);
-      setMinutesError(true);
-      return;
-    }
+    // if (duration.minutes < 0 && duration.minutes > 60) {
+    //   setPostingButton(false);
+    //   setMinutesError(true);
+    //   return;
+    // }
 
-    if (data.releasedate <= 0) {
-      setPostingButton(false);
-      setReleaseError(true);
-      return;
-    }
+    // if (data.releasedate <= 0) {
+    //   setPostingButton(false);
+    //   setReleaseError(true);
+    //   return;
+    // }
 
-    if (data?.genre?.length == 0) {
-      setPostingButton(false);
-      setGenreError(true);
-      return;
-    }
+    // if (data?.genre?.length == 0) {
+    //   setPostingButton(false);
+    //   setGenreError(true);
+    //   return;
+    // }
 
-    const videoRef = ref(storage, `Movievideo/${videoUpload.name + v4()}`);
-    const ImgRef = ref(storage, `Movieimage/${imageUpload.name + v4()}`);
-
-    Promise.all([
-      uploadBytes(videoRef, videoUpload),
-      uploadBytes(ImgRef, imageUpload),
-    ])
-      .then(([videoSnapshot, imageSnapshot]) => {
-        return Promise.all([
-          getDownloadURL(videoSnapshot.ref),
-          getDownloadURL(imageSnapshot.ref),
-        ]);
-      })
-      .then(([videoURL, imageUrl]) => {
-        return axios.post("http://localhost/cinehub/movies/postmovies.php", {
+    console.log(imageUpload);
+    console.log(videoUpload);
+    if (imageUpload == null && videoUpload == null) {
+      axios
+        .post("http://localhost/cinehub/movies/editmovie.php?id=" + id, {
           ...data,
-          image: imageUrl,
-          url: videoURL,
           duration: `${duration?.hour}:${duration?.minutes}`,
+        })
+        .then((res) => {
+          console.log(res);
+          alert(res.data.status);
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      const videoRef = ref(storage, `Movievideo/${videoUpload.name + v4()}`);
+      const ImgRef = ref(storage, `Movieimage/${imageUpload.name + v4()}`);
+      Promise.all([
+        uploadBytes(videoRef, videoUpload),
+        uploadBytes(ImgRef, imageUpload),
+      ])
+        .then(([videoSnapshot, imageSnapshot]) => {
+          return Promise.all([
+            getDownloadURL(videoSnapshot.ref),
+            getDownloadURL(imageSnapshot.ref),
+          ]);
+        })
+        .then(([videoURL, imageUrl]) => {
+          return axios.post(
+            "http://localhost/cinehub/movies/editmovie.php?id=" + id,
+            {
+              ...data,
+              image: imageUrl,
+              url: videoURL,
+              duration: `${duration?.hour}:${duration?.minutes}`,
+            }
+          );
+        })
+        .then((res) => {
+          alert("Success!");
+          setPostingButton(false);
+          alert(res.data.status);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
         });
-      })
-      .then((res) => {
-        alert("Success!");
-        setPostingButton(false);
-        alert(res.data.status);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error("Error:", error.message);
-      });
+    }
     // console.log(data);
   };
 
@@ -243,7 +267,7 @@ const EditMovie = () => {
             marginTop: "20px",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>Add Movies form box !</span>
+          <span style={{ fontWeight: "bold" }}>Edit Movies form box !</span>
         </div>
 
         <div className="addmoviesform_box">
@@ -260,6 +284,7 @@ const EditMovie = () => {
                 Name
               </label>
               <input
+                required
                 onChange={handleName}
                 style={{ width: "200px" }}
                 type="text"
@@ -283,6 +308,7 @@ const EditMovie = () => {
               </label>
               <textarea
                 value={data.description}
+                required
                 onChange={handleDescription}
                 name=""
                 id=""
@@ -306,7 +332,7 @@ const EditMovie = () => {
                   const allowExtention = ["mp4"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if (allowExtention.includes(extention)) {
+                  if (allowExtention?.includes(extention)) {
                     setUrlError(false);
                     alert("valid file extention");
                     setVideoUpload(e.target.files[0]);
@@ -334,7 +360,7 @@ const EditMovie = () => {
                   const allowExtention = ["png", "jpg", "jpeg", "gif", "jfif"];
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
-                  if (allowExtention.includes(extention)) {
+                  if (allowExtention?.includes(extention)) {
                     alert("valid file extention");
                     setImageError(false);
                     setImageUpload(e.target.files[0]);
@@ -446,7 +472,11 @@ const EditMovie = () => {
                       onChange={handleChange}
                       type="checkbox"
                       value={genre} // Add the value attribute here
-                      checked={data.genre.includes(genre)} // Correctly handles checking
+                      checked={
+                        Array.isArray(data.genre)
+                          ? data.genre.includes(genre)
+                          : false
+                      }
                     />
                   </>
                 ))}
