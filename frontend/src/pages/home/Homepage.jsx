@@ -5,11 +5,10 @@ import CarouselShow from "../../components/Carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 const Homepage = () => {
   const [movie, setMovie] = useState([]); // for storing and displaying data
   const [searchedMovie, setSearchedMovie] = useState([]); // for storing searched movies
-  
+
   const user = JSON.parse(localStorage.getItem("user"));
   // console.log(user);
 
@@ -35,7 +34,7 @@ const Homepage = () => {
   return (
     <div className="homepage_container">
       <div className="homepage_box">
-        <NavBar  searchedMovies={searchedMovies} />
+        <NavBar searchedMovies={searchedMovies} />
         <div>
           <CarouselShow movie={searchedMovie} />
         </div>
@@ -50,17 +49,19 @@ const Homepage = () => {
             justifyContent: "space-between",
           }}
         >
-          <span
-            style={{
-              border: "2px solid white",
-              borderRadius: "10px",
-              backgroundColor: "#cec0f5",
-              width: "120px",
-              padding: "2px",
-            }}
-          >
-            You might like
-          </span>
+          <Link to={"/recommendation"} style={{ textDecoration: "none",color:"black" }}>
+            <span
+              style={{
+                border: "2px solid white",
+                borderRadius: "10px",
+                backgroundColor: "#cec0f5",
+                width: "120px",
+                padding: "2px",
+              }}
+            >
+              You might like
+            </span>
+          </Link>
           <button
             style={{
               border: "2px solid whitesmoke",
@@ -82,7 +83,7 @@ const Homepage = () => {
             flexWrap: "wrap",
           }}
         >
-          {searchedMovie.length > 0 ?
+          {searchedMovie.length > 0 ? (
             searchedMovie.map((movie) => (
               <div className="card" key={movie.id}>
                 <div className="card_background">
@@ -136,9 +137,12 @@ const Homepage = () => {
                   </div>
                 </div>
               </div>
-            )):
-            <span style={{fontWeight:"bold",fontFamily:"cursive"}}>No Result Found !</span>
-            }
+            ))
+          ) : (
+            <span style={{ fontWeight: "bold", fontFamily: "cursive" }}>
+              No Result Found !
+            </span>
+          )}
         </div>
       </div>
     </div>

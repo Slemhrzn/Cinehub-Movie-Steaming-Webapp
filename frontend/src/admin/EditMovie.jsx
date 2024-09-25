@@ -334,7 +334,7 @@ const EditMovie = () => {
                   console.log(extention);
                   if (allowExtention?.includes(extention)) {
                     setUrlError(false);
-                    alert("valid file extention");
+                   // alert("valid file extention");
                     setVideoUpload(e.target.files[0]);
                   } else {
                     alert("Invalid file extention");
@@ -361,7 +361,7 @@ const EditMovie = () => {
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
                   if (allowExtention?.includes(extention)) {
-                    alert("valid file extention");
+                    //alert("valid file extention");
                     setImageError(false);
                     setImageUpload(e.target.files[0]);
                   } else {

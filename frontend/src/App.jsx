@@ -16,6 +16,7 @@ import NavBar from "./components/NavBar";
 import Checkbox from "./Checkbox";
 import Bookmark from "./bookmark/Bookmark";
 import EditMovie from "./admin/EditMovie";
+import Recommendation from "./pages/recommendation/Recommendation";
 // import AllMovies from './pages/home/AllMovies'
 
 function App() {
@@ -67,6 +68,10 @@ function App() {
     {
       path: "/editMovie/:id",
       element: <EditMovie />,
+    },
+    {
+      path: "/recommendation",
+      element: <Recommendation/>,
     },
   ]);
   return <RouterProvider router={router} />;

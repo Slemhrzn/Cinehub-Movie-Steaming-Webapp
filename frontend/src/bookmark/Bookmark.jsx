@@ -97,6 +97,7 @@ const Bookmark = () => {
                   fontWeight: "bold",
                   fontFamily:"cursive",
                   fontSize:"50px"
+                  
                 }}
               >
                 No bookmarks !!

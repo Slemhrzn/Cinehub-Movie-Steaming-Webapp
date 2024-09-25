@@ -65,7 +65,7 @@ const AdminManageMovie = () => {
                 {Array.isArray(JSON.parse(movie.genre)) ? JSON.parse(movie.genre).map((genre) => (
                   <span style={{ marginRight: "10px" }}>| {genre} |</span>
                 )):(JSON.parse(movie.genre)) }
-              </td>
+              </td> 
               <td
                 style={{
                   display: "flex",

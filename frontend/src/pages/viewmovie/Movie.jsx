@@ -141,13 +141,17 @@ const Movie = () => {
             {movie.releasedate}
           </div>
 
-          <div onClick={handleBookMark}>
-            {isBookMarked ? (
-              <GoBookmarkFill size={25}  />
-            ) : (
-              <IoBookmarkOutline size={25} />
-            )}
-          </div>
+          {user.role == "ADMIN" ? (
+            <div></div>
+          ) : (
+            <div onClick={handleBookMark}>
+              {isBookMarked ? (
+                <GoBookmarkFill size={25} />
+              ) : (
+                <IoBookmarkOutline size={25} />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

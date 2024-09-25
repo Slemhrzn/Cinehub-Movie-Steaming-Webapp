@@ -328,7 +328,7 @@ const Addmovie = () => {
                   const extention = e.target.files[0].name.split(".").pop();
                   console.log(extention);
                   if (allowExtention.includes(extention)) {
-                    alert("valid file extention");
+                   // alert("valid file extention");
                     setImageError(false);
                     setImageUpload(e.target.files[0]);
                   } else {
