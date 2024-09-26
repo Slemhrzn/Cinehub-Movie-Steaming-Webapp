@@ -36,7 +36,7 @@ const Recommendation = () => {
           fontSize:"40px"
         }}
       >
-        Recommended Movies!!
+        Recommended Movies based on Rating !!
       </div>
       <div
         style={{

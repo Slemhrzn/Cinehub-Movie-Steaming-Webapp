@@ -7,6 +7,9 @@ const NavBar = ({ searchedMovies }) => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(""); // State to store search term
 
+  const user=JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+
   function handleLogout() {
     let result = confirm("Do you want to log-out?");
     if (result == true) {
@@ -64,7 +67,7 @@ const NavBar = ({ searchedMovies }) => {
         </div>
       }
       <div onClick={handleLogout}>
-        <FaUserCircle size={30} color="white" />
+        <FaUserCircle size={30} color="white"/>{user.name}
       </div>
     </div>
   );

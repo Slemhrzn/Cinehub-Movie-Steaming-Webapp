@@ -59,19 +59,20 @@ const Homepage = () => {
                 padding: "2px",
               }}
             >
-              You might like
+              Based on Rating
             </span>
           </Link>
           <button
             style={{
               border: "2px solid whitesmoke",
               borderRadius: "10px",
-              width: "80px",
+              width: "150px",
               backgroundColor: "#cec0f5",
               color: "black",
+              padding:"2px"
             }}
           >
-            See all
+           Based on Playcount
           </button>
         </div>
 
