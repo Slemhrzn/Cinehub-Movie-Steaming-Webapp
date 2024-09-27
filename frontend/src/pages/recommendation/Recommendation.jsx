@@ -15,8 +15,8 @@ const Recommendation = () => {
     axios
       .get(`http://localhost/CINEHUB/algorithm.php?user_id=${user.id}`)
       .then((res) => {
-        console.log(res.data.recommendations);
-        setMovies(res.data.recommendations);
+        console.log(res.data.recommendations ?? []);
+        setMovies(res.data.recommendations ?? [])
       })
       .catch((err) => console.log(err));
   }, []);
@@ -46,7 +46,7 @@ const Recommendation = () => {
           justifyContent: "space-evenly",
         }}
       >
-        {movies.length > 0 ? (
+        {movies?.length > 0 ? (
           movies.map((m, i) => (
             <div key={i} className="card">
               <div className="card_background">

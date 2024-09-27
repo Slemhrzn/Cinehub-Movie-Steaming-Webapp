@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import "./Movie.css";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { GoBookmarkFill } from "react-icons/go";
+import { FaStar } from "react-icons/fa";
 
 const Movie = () => {
   const { id } = useParams();
@@ -22,6 +23,8 @@ const Movie = () => {
 
   const [isBookMarked, setIsBookMarked] = useState(false); // Initialize to false
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const [rating, setRating] = useState(1); // Initial rating
 
   useEffect(() => {
     axios
@@ -45,7 +48,7 @@ const Movie = () => {
 
   useEffect(() => {
     if (movie.id) {
-      var object = {
+      const object = {
         movie_id: movie.id,
         user_id: user.id,
       };
@@ -53,15 +56,14 @@ const Movie = () => {
       axios
         .post("http://localhost/cinehub/user/checkBookmark.php", object)
         .then((res) => {
-          console.log(res?.data?.isBookmark);
           setIsBookMarked(res?.data?.isBookmark);
         })
         .catch((err) => console.log(err));
     }
-  }, [movie.id, user.id]); // Only run when movie ID changes or user ID changes
+  }, [movie.id, user.id]); // Only run when movie ID or user ID changes
 
   const handleBookMark = () => {
-    var object = {
+    const object = {
       movie_id: movie.id,
       user_id: user.id,
     };
@@ -80,6 +82,27 @@ const Movie = () => {
 
   if (hour.slice(0, 1) === "0") {
     hour = hour.slice(1);
+  }
+
+  const handleRating = (e) => {
+    setRating(parseInt(e.target.value));
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const value = {
+      rating: rating,
+      movie_id: id,
+      user_id: user?.id,
+    };
+
+    axios
+      .post("http://localhost/CINEHUB/addRating.php", value)
+      .then((res) => {
+        console.log(res.data.message);
+        alert(res.data.message);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -117,6 +140,25 @@ const Movie = () => {
           </div>
 
           <div>{movie.description}</div>
+          <div>Rate Movie</div>
+          <form
+            onSubmit={handleSubmit}
+            style={{ display: "flex", gap: "10px" }}
+          >
+            <div>
+              {Array.from({ length: rating }, (_, index) => (
+                <FaStar key={index} />
+              ))}
+            </div>
+            <select onChange={handleRating} value={rating}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <button>Rate</button>
+          </form>
         </div>
 
         <div className="viewmovie_right">
@@ -129,9 +171,8 @@ const Movie = () => {
 
           <div>
             <span style={{ fontSize: "17px", fontWeight: "bold" }}>Genre:</span>
-            {Array.isArray(movie.genre)
-              ? movie.genre.map((g, index) => <li key={index}>{g}</li>)
-              : ""}
+            {Array.isArray(movie.genre) &&
+              movie.genre.map((g, index) => <li key={index}>{g}</li>)}
           </div>
 
           <div>
@@ -141,7 +182,7 @@ const Movie = () => {
             {movie.releasedate}
           </div>
 
-          {user.role == "ADMIN" ? (
+          {user.role === "ADMIN" ? (
             <div></div>
           ) : (
             <div onClick={handleBookMark}>
