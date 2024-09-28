@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+// import Spline from "@splinetool/react-spline";
 const Login = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -100,23 +100,43 @@ const Login = () => {
     <div className="login_container">
       <div className="login_box">
         <div className="login_left">
-          <h1>Welcome back!</h1>
+          <span>Welcome to CineHub! 
+            <br />Let's Explore the Best Films Together!</span>
+          
         </div>
 
         <div className="login_right">
-          <div style={{ height: "80%", width: "70%" }}>
+          <div
+            style={{
+              height: "80%",
+              width: "70%",
+            }}
+          >
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
             >
-              <h2 style={{ fontFamily: "'Lobster', cursive" }}>Login</h2>
-              <p
+              <h2
                 style={{
-                  fontFamily: "'Lobster', cursive",
-                  fontSize: "12px",
-                  marginBottom: "20px",
+                  fontFamily: "var(--mainfont)",
+                  color: "whitesmoke",
+                  fontWeight: "bold",
                 }}
               >
-                Welcome back! Please login to your account.
+                Welcome!
+              </h2>
+              <p
+                style={{
+                  fontFamily: "var(--mainfont)",
+                  fontSize: "20px",
+                  marginBottom: "20px",
+                  color: "whitesmoke ",
+                }}
+              >
+                Glad to See You ! Access Your Account
               </p>
             </div>
 
@@ -125,9 +145,10 @@ const Login = () => {
                 <div
                   style={{
                     marginBottom: "20px",
-                    fontFamily: "'Lobster', cursive",
-                    fontSize: "15px",
-                    color: "white",
+                    fontFamily: "var(--mainfont)",
+                    fontSize: "18px",
+                    color: "black",
+                    fontWeight: "bold",
                   }}
                 >
                   <label htmlFor="">Email</label>
@@ -150,9 +171,10 @@ const Login = () => {
                 <div style={{ marginBottom: "20px" }}>
                   <div
                     style={{
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "15px",
-                      color: "white",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
+                      color: "black",
+                      fontWeight:"bold"
                     }}
                   >
                     <label htmlFor="">Password</label>
@@ -188,7 +210,13 @@ const Login = () => {
                   }}
                 >
                   <button
-                    style={{ fontFamily: "'Lobster', cursive" }}
+                    style={{
+                      fontFamily: "var(--mainfont)",
+                      fontSize:"18px",
+                      background: "#254369",
+                      color: "white",
+                      fontWeight:"bold"
+                    }}
                     className="login_button"
                   >
                     Login
@@ -196,18 +224,17 @@ const Login = () => {
                 </div>
 
                 <div
-                onClick={checkEmailExist}
+                  onClick={checkEmailExist}
                   style={{
                     fontFamily: "Garamond",
-                    fontWeight:"bold",
-                    fontSize: "14px",
+                    fontWeight: "bold",
+                    fontSize: "15px",
                     color: "black",
                     marginTop: "5px",
-                    cursor:"pointer"
+                    cursor: "pointer",
                   }}
                 >
                   Forgot password?{" "}
-                
                 </div>
 
                 <div>
@@ -215,8 +242,9 @@ const Login = () => {
                     style={{
                       color: "black",
                       marginTop: "20px",
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "12px",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "15px",
+                      fontWeight:"bold"
                     }}
                   >
                     New User?{" "}

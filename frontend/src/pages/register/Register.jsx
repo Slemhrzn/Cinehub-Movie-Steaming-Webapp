@@ -9,13 +9,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const[hintError,setHintError]= useState(false);
+  const [hintError, setHintError] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     role: "USER",
-    hint:""
+    hint: "",
   });
 
   console.log(data);
@@ -58,26 +58,22 @@ const Register = () => {
     }
   }
 
-  
-
-  function handleHint(e){
-      const hint = e.target.value.toLowerCase();
-      // console.log(hint)
-      if(hint.length >= 3 && validHint(hint) && validColor(hint))
-      {
-        setData({...data,hint:hint})
-        setHintError(false);
-      }
-      else{
-        setHintError(true);
-      }
+  function handleHint(e) {
+    const hint = e.target.value.toLowerCase();
+    // console.log(hint)
+    if (hint.length >= 3 && validHint(hint) && validColor(hint)) {
+      setData({ ...data, hint: hint });
+      setHintError(false);
+    } else {
+      setHintError(true);
+    }
   }
-  function validHint(hint){
-     const valid= /^[a-zA-Z]+$/;
-     return valid.test(hint); //valid -> return true else false
+  function validHint(hint) {
+    const valid = /^[a-zA-Z]+$/;
+    return valid.test(hint); //valid -> return true else false
   }
 
-  function validColor(hint){
+  function validColor(hint) {
     const validHint = [
       "black",
       "blue",
@@ -90,10 +86,10 @@ const Register = () => {
       "grey",
       "pink",
       "orange",
-      "lavender"
-    ]
-    var result = validHint.includes(hint)
-    return result
+      "lavender",
+    ];
+    var result = validHint.includes(hint);
+    return result;
   }
 
   const handleSubmit = (e) => {
@@ -110,7 +106,14 @@ const Register = () => {
     <div className="register_container">
       <div className="register_box">
         <div className="register_left">
-          <h1 style={{ color: "black" }}>Join Cinehub!</h1>
+          <h1
+            style={{
+              color: "black",
+              fontFamily: "var(--mainfont)",
+            }}
+          >
+            Join Cinehub!
+          </h1>
         </div>
 
         <div className="register_right">
@@ -121,11 +124,21 @@ const Register = () => {
                 flexDirection: "column",
               }}
             >
-              <h2 style={{ fontFamily: "'Lobster', cursive" }}>Register</h2>
+              <span
+                style={{
+                  fontFamily: "var(--mainfont)",
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "whitesmoke",
+                }}
+              >
+                Welcome to CineHub! 🎬
+              </span>
               <p
                 style={{
-                  fontFamily: "'Lobster', cursive",
-                  fontSize: "12px",
+                  fontFamily: "var(--mainfont)",
+                  fontSize: "18px",
+                  color: "whitesmoke",
                 }}
               >
                 Hello there! Please register to create an account.
@@ -137,10 +150,11 @@ const Register = () => {
                 <div className="register_input_container">
                   <label
                     style={{
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "15px",
                       marginRight: "-0.3rem",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                       color: "black",
+                      fontWeight: "bold",
                     }}
                     htmlFor=""
                   >
@@ -152,7 +166,8 @@ const Register = () => {
                       width: "150px",
                       height: "35px",
                       marginLeft: "30px",
-                      fontFamily: "'Lobster', cursive",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                     }}
                     className="register_input"
                     onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -164,10 +179,11 @@ const Register = () => {
                 <div className="register_input_container">
                   <label
                     style={{
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "15px",
                       marginRight: "1.8rem",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                       color: "black",
+                      fontWeight: "bold",
                     }}
                     htmlFor=""
                   >
@@ -178,7 +194,8 @@ const Register = () => {
                     style={{
                       width: "150px",
                       height: "35px",
-                      fontFamily: "'Lobster', cursive",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                     }}
                     className="register_input"
                     onChange={handleEmail}
@@ -190,9 +207,10 @@ const Register = () => {
                 <div className="register_input_container">
                   <label
                     style={{
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "15px",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                       color: "black",
+                      fontWeight: "bold",
                     }}
                     htmlFor=""
                   >
@@ -203,7 +221,8 @@ const Register = () => {
                     style={{
                       width: "150px",
                       height: "35px",
-                      fontFamily: "'Lobster', cursive",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
                     }}
                     className="register_input"
                     type="password"
@@ -211,13 +230,21 @@ const Register = () => {
                     required
                   />
                 </div>
-                <hr style={{background:"black",border:"none",height:"2px", marginRight:"1rem"  }} />
+                <hr
+                  style={{
+                    background: "black",
+                    border: "none",
+                    height: "2px",
+                    marginRight: "1rem",
+                  }}
+                />
 
                 <label
                   style={{
-                    fontFamily: "'Lobster', cursive",
-                    fontSize: "15px",
+                    fontFamily: "var(--mainfont)",
+                    fontSize: "18px",
                     color: "black",
+                    fontWeight: "bold",
                   }}
                   htmlFor=""
                 >
@@ -231,14 +258,22 @@ const Register = () => {
                   style={{
                     width: "150px",
                     height: "35px",
-                    fontFamily: "'Lobster', cursive",
+                    fontFamily: "var(--mainfont)",
+                    fontSize:"18px"
                   }}
                   className="register_input"
                   type="text"
                   onChange={handleHint}
                   required
                 />
-                <hr style={{background:"black",border:"none",height:"2px", marginRight:"1rem"  }} />
+                <hr
+                  style={{
+                    background: "black",
+                    border: "none",
+                    height: "2px",
+                    marginRight: "1rem",
+                  }}
+                />
                 <div
                   style={{
                     transform: "translate(130px)",
@@ -247,7 +282,12 @@ const Register = () => {
                   <button
                     disabled={emailError}
                     type="submit"
-                    style={{ fontFamily: "'Lobster', cursive" }}
+                    style={{  fontFamily: "var(--mainfont)",
+                      fontSize: "18px",
+                      color: "whitesmoke",
+                      fontWeight: "bold", 
+                      background:"#254369"
+                    }}
                     className="register_button"
                   >
                     Register
@@ -268,15 +308,16 @@ const Register = () => {
                   <div
                     style={{
                       color: "black",
-                     
-                      fontFamily: "'Lobster', cursive",
-                      fontSize: "12px",
+                      fontFamily: "var(--mainfont)",
+                      fontSize: "15px",
                       marginBottom: "20px",
+                      fontWeight:"bold"
                     }}
                   >
-                    Already have an account?{" "}
-                    <Link style={{ color: "black" }} to="/">
-                      Login
+                   Have an account?{" "}
+                    <Link style={{ 
+                      color: "whitesmoke" }} to="/">
+                    Log in
                     </Link>
                   </div>
                 </div>

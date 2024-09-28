@@ -3,4 +3,9 @@
     padding: 0;
 
 }
-
+:root {
+    --mainbackground:linear-gradient(to right, #0f3460, #16213e, #0f3460);
+    --mainfont:Garamond;
+    --mainbuttoncolor:#254369
+  }
+  
