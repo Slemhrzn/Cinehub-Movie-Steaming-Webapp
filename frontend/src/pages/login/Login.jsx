@@ -45,7 +45,7 @@ const Login = () => {
     }
 
     axios
-      .post("http://localhost/cinehub/user/getuser.php", {email})
+      .post("http://localhost/cinehub/user/getuser.php", { email })
       .then((res) => {
         const result = res.data.message;
         if (result == true) {
@@ -65,14 +65,16 @@ const Login = () => {
                   password: newPassword,
                 };
                 axios
-                  .post("http://localhost/cinehub/user/postNewPassword.php", obj)
+                  .post(
+                    "http://localhost/cinehub/user/postNewPassword.php",
+                    obj
+                  )
                   .then((res) => {
                     const result = res.data.message;
-                    console.log(result)
+                    console.log(result);
                     if (result == true) {
                       alert("Password Updated");
-                      window.location.reload(true)
-
+                      window.location.reload(true);
                     } else {
                       alert("Something went wrong");
                     }
@@ -194,15 +196,18 @@ const Login = () => {
                 </div>
 
                 <div
+                onClick={checkEmailExist}
                   style={{
-                    fontFamily: "'Lobster', cursive",
+                    fontFamily: "Garamond",
+                    fontWeight:"bold",
                     fontSize: "14px",
                     color: "black",
-                    marginTop:"5px"
+                    marginTop: "5px",
+                    cursor:"pointer"
                   }}
                 >
                   Forgot password?{" "}
-                  <div onClick={checkEmailExist} style={{color:"whitesmoke",  textDecoration: "underline"}}>Click here.</div>
+                
                 </div>
 
                 <div>
