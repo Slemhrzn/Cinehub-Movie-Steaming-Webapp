@@ -25,12 +25,43 @@
   border-bottom-left-radius: 50px;
   font-family: var(--mainfont);
   font-size: 24px;
-  color: black;
+  color: whitesmoke;
   font-weight: bold;
-  /* background-image: url("/bg.jpg"); */
-  background-size: cover;
-  background-color: #d0e6f8;
+  background-color: #d0e6f8; /* Fallback color */
+  position: relative;
+  overflow: hidden; /* Ensure pseudo-element is contained */
 }
+
+.login_left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px); /* Apply the blur effect */
+  z-index: 1; /* Place it below the text */
+}
+
+.login_left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--mainbackground); /* Semi-transparent blue overlay */
+  z-index: 2; /* Place it above the background image but below the text */
+}
+
+.login_left * {
+  position: relative;
+  z-index: 3; /* Ensure text is above the background and overlay */
+}
+
 
 .login_right {
   width: 50%;
