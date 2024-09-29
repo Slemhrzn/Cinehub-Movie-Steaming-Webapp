@@ -6,7 +6,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-family: cursive;
+    font-family: var(--mainfont);
+    font-size: 18px;
+    font-weight: bold;
+    
 }
 
 .group {
@@ -26,20 +29,21 @@
     border: 2px solid transparent;
     border-radius: 8px;
     outline: none;
-    background-color:#cec0f5;
-    color: #0d0c22;
+    background-color:var(--mainbuttoncolor);
+    /* color: #0d0c22; */
     box-shadow: 0 0 5px #C1D9BF, 0 0 0 10px #f5f5f5eb;
     transition: .3s ease;
+    font-weight: bold;
   }
   
   .input::placeholder {
-    color: #777;
+    color: whitesmoke;
   }
   
   .icon {
     position: absolute;
     left: 1rem;
-    fill: #777;
+    fill: whitesmoke;
     width: 1rem;
     height: 1rem;
   }

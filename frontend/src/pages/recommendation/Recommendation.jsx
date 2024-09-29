@@ -26,17 +26,15 @@ const Recommendation = () => {
       <NavBar />
       <div
         style={{
-          fontFamily: "cursive",
-          fontSize: "3em",
-          background: "linear-gradient(to bottom right, #B76E79, #5D3FD3)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
+          fontFamily: "var(--mainfont)",
+          fontSize: "25px",
+          fontWeight:"bold",
+          color: "black",
           backgroundClip: "text",
-          color: "transparent",
-          fontSize:"40px"
+         
         }}
       >
-        Recommended Movies based on Rating !!
+        Recommended Movies Based On Rating !!
       </div>
       <div
         style={{
@@ -55,7 +53,7 @@ const Recommendation = () => {
                     height: "170px",
                     width: "190px",
                     marginBottom: "5px",
-                    backgroundColor: "rgb(200, 200, 239)",
+                    backgroundColor: "#5B7DA6",
                   }}
                 >
                   <img
@@ -73,7 +71,7 @@ const Recommendation = () => {
                   style={{
                     height: "170px",
                     width: "190px",
-                    backgroundColor: " #a0a5da",
+                    backgroundColor: " #5B7DA6",
                   }}
                 >
                   <span
@@ -103,16 +101,14 @@ const Recommendation = () => {
           ))
         ) : (
           <div style={
-            {fontFamily: "cursive",
-            fontSize: "3em",
-            background: "linear-gradient(to bottom right, #B76E79, #5D3FD3)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            {fontFamily: "var(--mainfont)",
+            fontSize: "25px",
+            fontWeight:"bold",
             backgroundClip: "text",
-            color: "transparent",
-            fontSize:"40px"}
+            color: "black",
+            }
         }
-        >No movies Recommended!!</div>
+        >No Movies Recommended!!</div>
         )}
       </div>
     </div>

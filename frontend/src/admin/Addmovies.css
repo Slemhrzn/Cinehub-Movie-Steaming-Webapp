@@ -1,27 +1,32 @@
-.addmovies_container{
-    height: 100%;
-    width: 100vw;
-    padding-bottom: 1rem;
-    background-color: rgb(200, 200, 239);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.addmovies_container {
+  height: 100%;
+  width: 100vw;
+  padding-bottom: 1rem;
+  background-image: var(--mainbackground);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.middle_container{
-    margin-top: 20px;
-    height:100%;
-    width: 60rem;
-    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
-    padding-bottom: 1rem;
-    border-radius: 20px;
-    color:black;
+.middle_container {
+  margin-top: 20px;
+  height: 100%;
+  width: 60rem;
+  padding-bottom: 1rem;
+  border-radius: 20px;
+  background-color: #111927;
+  background-image: radial-gradient(
+      at 47% 33%,
+      hsl(212, 72%, 59%) 0,
+      transparent 100%
+    ),
+    radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 100%);
+  background-position: center;
 }
 
-.addmoviesform_box{
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.addmoviesform_box {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

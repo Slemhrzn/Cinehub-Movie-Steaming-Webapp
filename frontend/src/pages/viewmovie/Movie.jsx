@@ -127,12 +127,15 @@ const Movie = () => {
           />
         </div>
 
-        <div className="viewmovie_middle">
+        <div
+          className="viewmovie_middle"
+          style={{ fontFamily: "var(--mainfont)", fontSize: "18px" }}
+        >
           <div
             style={{
               marginTop: "10px",
-              fontSize: "20px",
-              fontFamily: "cursive",
+              fontSize: "22px",
+              fontFamily: "var(--mainfont)",
               fontWeight: "bold",
             }}
           >
@@ -161,7 +164,10 @@ const Movie = () => {
           </form>
         </div>
 
-        <div className="viewmovie_right">
+        <div
+          className="viewmovie_right"
+          style={{ fontFamily: "var(--mainfont)", fontSize: "18px" }}
+        >
           <div style={{ marginTop: "10px" }}>
             <span style={{ fontSize: "17px", fontWeight: "bold" }}>
               Duration:
@@ -176,7 +182,7 @@ const Movie = () => {
           </div>
 
           <div>
-            <span style={{ fontSize: "17px", fontWeight: "bold" }}>
+            <span style={{ fontSize: "17px", fontWeight: "bold",marginRight:"5px" }}>
               Release:
             </span>
             {movie.releasedate}

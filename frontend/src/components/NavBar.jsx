@@ -42,12 +42,12 @@ const NavBar = ({ searchedMovies }) => {
           className="input"
         />
       </div>
-      <Link to="/homepage" style={{ color: "black", textDecoration: "none" }}>
+      <Link to="/homepage" style={{ color: "whitesmoke", textDecoration: "none" }}>
         <div
           style={{
             border: "2px solid white",
             borderRadius: "10px",
-            backgroundColor: "#cec0f5",
+            backgroundColor: "var(--mainbuttoncolor)",
             padding: "5px 20px  ",
           }}
         >
@@ -59,15 +59,15 @@ const NavBar = ({ searchedMovies }) => {
           style={{
             border: "2px solid white",
             borderRadius: "10px",
-            backgroundColor: "#cec0f5",
+            backgroundColor: "var(--mainbuttoncolor)",
             padding: "5px 20px  ",
           }}
         >
-          <Link to="/bookmark"  style={{ color: "black", textDecoration: "none" }}>My bookmarks</Link>
+          <Link to="/bookmark"  style={{ color: "whitesmoke", textDecoration: "none" }}>My bookmarks</Link>
         </div>
       }
       <div onClick={handleLogout}>
-        <FaUserCircle size={30} color="white"/>{user.name}
+        <FaUserCircle size={30} color="white"/><span style={{color:"whitesmoke",marginLeft:"10px"}}>{user.name}</span>
       </div>
     </div>
   );

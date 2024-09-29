@@ -1,6 +1,6 @@
 .admin_container {
   width: 100vw;
-  background-color: rgb(200, 200, 239);
+  background-image: var(--mainbackground);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,9 +17,11 @@
     border-radius: 10px;
     border: 2px solid whitesmoke;
     padding:  5px 20px  ;
-    font-family: cursive;
-    background-color: #cec0f5;
-    
+    font-family: var(--mainfont);
+    font-size: 18px;
+    font-weight: bold;
+    background-color:var(--mainbuttoncolor);
+    color: whitesmoke;
    
   
 }

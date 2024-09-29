@@ -58,12 +58,12 @@ const Admindashboard = () => {
       <main className="main-content">
         <header className="header">
           <div className="header-title">
-            <h1 style={{ fontFamily: "cursive", color: "black" }}>
+            <h1 style={{ fontFamily: "var(--mainfont)", color: "black" }}>
               Welcome , {jValue.name} !
             </h1>
           </div>
         </header>
-        <section className="movies">
+        <section className="movies" >
           <h2>Available Movies</h2>
           <div className="movies-grid">
             {movies.map((movies) => {
@@ -72,7 +72,7 @@ const Admindashboard = () => {
                   style={{ textDecoration: "none" }}
                   to={"/viewmovie/" + movies.id}
                 >
-                  <div className="movie-card">
+                  <div className="movie-card" >
                     <img
                       width="300px"
                       height="150px"
@@ -80,10 +80,10 @@ const Admindashboard = () => {
                       src={movies.image}
                       alt="Movie Title"
                     />
-                    <h5 style={{ color: "black", fontFamily: "cursive" }}>
+                    <h5 style={{ color: "whitesmoke",fontWeight:"bold", fontFamily: "var(--mainfont)" }}>
                       {movies.name}
                     </h5>
-                    <p style={{ color: "black", fontFamily: "cursive" }}>
+                    <p style={{ color: "whitesmoke", fontFamily: "var(--mainfont)" }}>
                       {Array.isArray(JSON.parse(movies.genre))
                         ? JSON.parse(movies.genre)?.map((i) => {
                             return <li>{i}</li>;

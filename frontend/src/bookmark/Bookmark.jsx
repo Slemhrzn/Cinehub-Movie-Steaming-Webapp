@@ -39,7 +39,7 @@ const Bookmark = () => {
                         height: "170px",
                         width: "190px",
                         marginBottom: "5px",
-                        backgroundColor: "rgb(200, 200, 239)",
+                        backgroundColor: "#5B7DA6",
                       }}
                     >
                       <img
@@ -57,7 +57,7 @@ const Bookmark = () => {
                       style={{
                         height: "170px",
                         width: "190px",
-                        backgroundColor: " #a0a5da",
+                        backgroundColor: "#5B7DA6",
                       }}
                     >
                       <span
@@ -72,8 +72,13 @@ const Bookmark = () => {
                               style={{
                                 borderRadius: "20px",
                                 border: "2px solid white",
-                                padding: "5px",
-                                fontFamily: "cursive",
+                                padding: "2px 4px 2px;",
+                                fontFamily: "var(--mainfont)",
+                                fontWeight: "bold",
+                                padding: "6px",
+                                background: "var(--mainbuttoncolor)",
+                                color: "whitesmoke",
+
                               }}
                             >
                               Watch
@@ -95,12 +100,12 @@ const Bookmark = () => {
                   alignItems: "center",
                   color: "whitesmoke",
                   fontWeight: "bold",
-                  fontFamily:"cursive",
-                  fontSize:"50px"
+                  fontFamily:"var(--mainfont)",
+                  fontSize:"25px"
                   
                 }}
               >
-                No bookmarks !!
+                No Bookmarks !!
               </div>
             )}
           </div>

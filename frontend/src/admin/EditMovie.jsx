@@ -263,8 +263,10 @@ const EditMovie = () => {
         <div
           style={{
             textAlign: "center",
-            fontFamily: "cursive",
+            fontFamily: "var(--mainfont)",
+            fontSize:"22px",
             marginTop: "20px",
+            color:"whitesmoke"
           }}
         >
           <span style={{ fontWeight: "bold" }}>Edit Movies form box !</span>
@@ -273,8 +275,10 @@ const EditMovie = () => {
         <div className="addmoviesform_box">
           <form
             style={{
-              fontSize: "15px",
-              fontFamily: "cursive",
+              fontSize: "18px",
+              fontFamily: "var(--mainfont)",
+              fontWeight:"bold",
+              color:"whitesmoke",
               marginTop: "20px",
             }}
             onSubmit={handleSubmit}
@@ -423,8 +427,9 @@ const EditMovie = () => {
               <label
                 htmlFor=""
                 style={{
-                  fontSize: "15px",
-                  fontFamily: "cursive",
+                  fontSize: "18px",
+                  fontFamily: "var(--mainfont)",
+                  fontWeight:"bold",
                   marginTop: "20px",
                   marginRight: "30px",
                 }}
@@ -455,10 +460,11 @@ const EditMovie = () => {
             <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
               <h3
                 style={{
-                  fontSize: "15px",
-                  fontFamily: "cursive",
+                  fontSize: "20px",
+                  fontFamily: "var(--mainfont)",
+                  fontWeight:"bold",
                   marginTop: "20px",
-                  fontWeight: "bold",
+                 
                 }}
               >
                 Choose genre
@@ -468,10 +474,11 @@ const EditMovie = () => {
                   <>
                     <label htmlFor="">{genre}</label>
                     <input
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: "20px",fontWeight:"normal" }}
                       onChange={handleChange}
                       type="checkbox"
                       value={genre} // Add the value attribute here
+
                       checked={
                         Array.isArray(data.genre)
                           ? data.genre.includes(genre)
@@ -485,7 +492,7 @@ const EditMovie = () => {
             <div style={{ color: "red" }}>
               {genreError && "Select atleast one genre"}
             </div>
-            <button
+            <button style={{fontSize:"18px",fontWeight:"bold"}}
               disabled={
                 postingButton ||
                 descriptionError ||

@@ -238,24 +238,27 @@ const Addmovie = () => {
         <div
           style={{
             textAlign: "center",
-            fontFamily: "cursive",
+            fontSize: "px",
+            fontFamily: "var(--mainfont)",
+            color:"whitesmoke",
             marginTop: "20px",
           }}
         >
-          <span style={{ fontWeight: "bold" }}>Add Movies form box !</span>
+          <span style={{ fontWeight: "bold", fontSize:"22px" }}>Add Movies form box !</span>
         </div>
 
         <div className="addmoviesform_box">
           <form
             style={{
-              fontSize: "15px",
-              fontFamily: "cursive",
+              fontSize: "18px",
+              fontFamily: "var(--mainfont)",
+              color:"whitesmoke",
               marginTop: "20px",
             }}
             onSubmit={handleSubmit}
           >
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
+              <label  style={{fontWeight:"bold"}} for="exampleInputEmail1" className="form-label">
                 Name
               </label>
               <input
@@ -276,7 +279,7 @@ const Addmovie = () => {
               className="mb-3"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              <label for="exampleInputEmail1" className="form-label">
+              <label style={{fontWeight:"bold"}} for="exampleInputEmail1" className="form-label">
                 Description
               </label>
               <textarea onChange={handleDescription} name="" id=""></textarea>
@@ -287,7 +290,7 @@ const Addmovie = () => {
             </div>
 
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
+              <label style={{fontWeight:"bold"}} for="exampleInputEmail1" className="form-label">
                 Video
               </label>
               <input
@@ -315,7 +318,7 @@ const Addmovie = () => {
               {urlError && "PLease upload  the video !!"}
             </div>
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
+              <label for="exampleInputEmail1" className="form-label" style={{fontWeight:"bold"}}>
                 Image
               </label>
               <input
@@ -344,7 +347,7 @@ const Addmovie = () => {
             </div>
 
             <div>
-              <label style={{ marginRight: "45px" }} htmlFor="">
+              <label style={{ marginRight: "45px",fontWeight:"bold" }} htmlFor="">
                 Hour
               </label>
               <input
@@ -363,7 +366,7 @@ const Addmovie = () => {
               />
               <div style={{ color: "red" }}>{hourError && "Invalid hour"}</div>
 
-              <label style={{ marginRight: "25px" }} htmlFor="">
+              <label  style={{ marginRight: "25px",fontWeight:"bold" }} htmlFor="">
                 Minutes
               </label>
               <input
@@ -388,8 +391,10 @@ const Addmovie = () => {
               <label
                 htmlFor=""
                 style={{
-                  fontSize: "15px",
-                  fontFamily: "cursive",
+                  fontSize: "18px",
+                  fontWeight:"bold",
+                  fontFamily: "var(--mainfont)",
+                  color:"whitesmoke",
                   marginTop: "20px",
                   marginRight: "30px",
                 }}
@@ -419,8 +424,9 @@ const Addmovie = () => {
             <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
               <h3
                 style={{
-                  fontSize: "15px",
-                  fontFamily: "cursive",
+                  fontSize: "20px",
+                  fontFamily: "var(--mainfont)",
+                  color:"whitesmoke",
                   marginTop: "20px",
                   fontWeight: "bold",
                 }}
@@ -444,7 +450,7 @@ const Addmovie = () => {
             <div style={{ color: "red" }}>
               {genreError && "Select atleast one genre"}
             </div>
-            <button
+            <button style={{fontWeight:"bold"}}
               disabled={
                 postingButton ||
                 descriptionError ||

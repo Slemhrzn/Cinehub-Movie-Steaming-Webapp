@@ -42,7 +42,8 @@ const CarouselShow = ({ movie }) => {
               left: "2rem", // Adjust positioning of content box
               borderRadius: "10px",
               padding: "15px", // Adjust padding for better fit
-              fontFamily: "cursive",
+              fontFamily: "var(--mainfont)",
+              fontWeight:"bold"
             }}
           >
             <div

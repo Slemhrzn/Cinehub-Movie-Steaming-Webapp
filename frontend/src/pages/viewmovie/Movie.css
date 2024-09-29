@@ -2,7 +2,7 @@
 {
  height:100% ;
  width: 100%;
- background-color: rgb(200, 200, 239) ;
+background-image: var( --mainbackground);
  display: flex;
  justify-content: center;
  align-items: center;
@@ -24,7 +24,12 @@
     margin-top: 30px;
     height: auto;
     width: 80vw;
-    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
+    background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 2px );
+-webkit-backdrop-filter: blur( 2px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,7 +51,9 @@
     align-items: start;
     flex-direction: column;
     gap: 20px;
-    font-family: cursive;
+    font-family: var(--mainfont);
+    font-size: 18px;
+    font-weight: bold;
     padding-left: 20px;
     border-radius: 20px;
     text-align: justify;

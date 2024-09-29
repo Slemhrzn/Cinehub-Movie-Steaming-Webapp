@@ -23,8 +23,9 @@ const Adminnavbar = () => {
           style={{
             border: "2px solid white",
             borderRadius: "10px",
-            backgroundColor: "#cec0f5",
+            backgroundColor: "var(--mainbuttoncolor)",
             padding: "5px 20px  ",
+            color:"whitesmoke"
           }}
         >
           Dashboard
@@ -38,8 +39,9 @@ const Adminnavbar = () => {
           style={{
             border: "2px solid white",
             borderRadius: "10px",
-            backgroundColor: "#cec0f5",
+            backgroundColor: "var(--mainbuttoncolor)",
             padding: "5px 20px  ",
+            color:"whitesmoke"
           }}
         >
           Manage movies

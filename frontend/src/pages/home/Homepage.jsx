@@ -42,21 +42,28 @@ const Homepage = () => {
         <div
           style={{
             marginTop: "30px",
-            fontFamily: "cursive",
+            fontFamily: "var(--mainfont)",
+            fontSize: "18px",
+            fontWeight: "bold",
             color: "black",
+            padding: "4px",
             width: "100%",
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <Link to={"/recommendation"} style={{ textDecoration: "none",color:"black" }}>
+          <Link
+            to={"/recommendation"}
+            style={{ textDecoration: "none", color: "black" }}
+          >
             <span
               style={{
                 border: "2px solid white",
                 borderRadius: "10px",
-                backgroundColor: "#cec0f5",
+                backgroundColor: "var(--mainbuttoncolor)",
                 width: "120px",
-                padding: "2px",
+                padding: "4px",
+                color:"whitesmoke"
               }}
             >
               Based on Rating
@@ -66,13 +73,14 @@ const Homepage = () => {
             style={{
               border: "2px solid whitesmoke",
               borderRadius: "10px",
-              width: "150px",
-              backgroundColor: "#cec0f5",
-              color: "black",
-              padding:"2px"
+              width: "170px",
+              backgroundColor: "#254369",
+              color: "whitesmoke",
+              padding: "2px",
+              fontWeight:"bold"
             }}
           >
-           Based on Playcount
+            Based on Playcount
           </button>
         </div>
 
@@ -93,7 +101,7 @@ const Homepage = () => {
                       height: "170px",
                       width: "190px",
                       marginBottom: "5px",
-                      backgroundColor: "rgb(200, 200, 239)",
+                      backgroundColor: "#5B7DA6",
                     }}
                   >
                     <img
@@ -111,7 +119,7 @@ const Homepage = () => {
                     style={{
                       height: "170px",
                       width: "190px",
-                      backgroundColor: " #a0a5da",
+                      backgroundColor: "#5B7DA6",
                     }}
                   >
                     <span
@@ -126,8 +134,12 @@ const Homepage = () => {
                             style={{
                               borderRadius: "20px",
                               border: "2px solid white",
-                              padding: "5px",
-                              fontFamily: "cursive",
+                              padding: "2px 4px 2px;",
+                              fontFamily: "var(--mainfont)",
+                              fontWeight: "bold",
+                              padding: "6px",
+                              background: "var(--mainbuttoncolor)",
+                              color: "whitesmoke",
                             }}
                           >
                             Watch
@@ -140,7 +152,15 @@ const Homepage = () => {
               </div>
             ))
           ) : (
-            <span style={{ fontWeight: "bold", fontFamily: "cursive" }}>
+            <span
+              style={{
+                fontWeight: "bold",
+                fontFamily: "var(--mainfont)",
+                fontSize: "22px",
+                fontWeight: "bold",
+                color:"whitesmoke"
+              }}
+            >
               No Result Found !
             </span>
           )}

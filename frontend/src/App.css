@@ -4,7 +4,7 @@
 
 }
 :root {
-    --mainbackground:linear-gradient(to right, #0f3460, #16213e, #0f3460);
+    --mainbackground:linear-gradient(to bottom, #134b84ab, #1b3a5b);
     --mainfont:Garamond;
     --mainbuttoncolor:#254369
   }

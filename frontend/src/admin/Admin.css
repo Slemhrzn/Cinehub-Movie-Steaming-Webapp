@@ -1,7 +1,8 @@
 .admin_home_container{
     display: flex;
     height: 100vh;
-    font-family: cursive;
+    font-family: var(--mainfont);
+    
     flex-direction: row;
 }
 
@@ -9,9 +10,11 @@
 .sidebar {
     width: 250px;
     height: 100%;
-    background-color: #8c7ddf;
+    background-image: var(--mainbackground);
     color: #fff;
     padding: 20px;
+    font-weight: bold;
+    font-size: 18px;
   
 }
 
@@ -75,7 +78,7 @@
 }
 
 .movie-card {
-    background-color: #8c7ddf;
+    background-image: var(--mainbackground);
     padding: 15px;
     border-radius: 4px;
     text-align: center;

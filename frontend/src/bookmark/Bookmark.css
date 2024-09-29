@@ -1,7 +1,7 @@
 .bookmark_container{
     height:auto;
     width: 100%;
-    background-color: rgb(200, 200, 239);
+    background-image: var(--mainbackground);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,9 +13,17 @@
     height: 90%;
     width: 90%;
     padding: 1rem 2rem;
-    background: linear-gradient(to bottom, rgb(157, 128, 225), rgb(190, 179, 219));
     border-radius: 10px;
     border: 1px solid #ccc;
+    background-color: #111927;
+    border: 1px solid #ccc;
+    background-image: radial-gradient(
+        at 47% 33%,
+        hsl(212, 72%, 59%) 0,
+        transparent 100%
+      ),
+      radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 100%);
+      box-shadow: 0 4px 8px rgba(0, 0, 1, 0.2);
 }
 
  
