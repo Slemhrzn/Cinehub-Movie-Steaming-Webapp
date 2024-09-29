@@ -100,8 +100,8 @@ const Login = () => {
     <div className="login_container">
       <div className="login_box">
         <div className="login_left">
-          <span>Welcome to CineHub! 
-            <br />Let's Explore the Best Films Together!</span>
+          {/* <span>Welcome to CineHub! 
+            <br />Let's Explore the Best Films Together!</span> */}
           
         </div>
 

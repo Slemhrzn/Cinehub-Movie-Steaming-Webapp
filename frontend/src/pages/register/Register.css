@@ -24,7 +24,8 @@
   align-items: center;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
-  /* background-image: url('register_left.jpg');  */
+  background-image: url('bg1.png'); 
+  background-position: center;
   font-family: "Lobster", cursive;
   color: whitesmoke;
   background-size: cover;

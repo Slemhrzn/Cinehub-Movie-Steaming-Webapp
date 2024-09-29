@@ -25,9 +25,10 @@
   border-bottom-left-radius: 50px;
   font-family: var(--mainfont);
   font-size: 24px;
-  color: whitesmoke;
+  color: black;
   font-weight: bold;
-  background-color: #d0e6f8; /* Fallback color */
+  /* Fallback color */
+  background-color: #d0e6f8; 
   position: relative;
   overflow: hidden; /* Ensure pseudo-element is contained */
 }
@@ -39,10 +40,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/bg.jpg");
+  background-image: url("/login.png");
   background-size: cover;
   background-position: center;
-  filter: blur(3px); /* Apply the blur effect */
+  /* filter: blur(1px); Apply the blur effect */
   z-index: 1; /* Place it below the text */
 }
 
@@ -69,10 +70,10 @@
   background-color: #111927;
   background-image: radial-gradient(
       at 47% 33%,
-      hsl(212.37, 72%, 59%) 0,
+      hsl(212, 72%, 59%) 0,
       transparent 100%
     ),
-    radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 55%);
+    radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 100%);
   background-position: center;
   display: flex;
   justify-content: center;

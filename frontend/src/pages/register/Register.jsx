@@ -106,14 +106,14 @@ const Register = () => {
     <div className="register_container">
       <div className="register_box">
         <div className="register_left">
-          <h1
+          {/* <h1
             style={{
               color: "black",
               fontFamily: "var(--mainfont)",
             }}
           >
             Join Cinehub!
-          </h1>
+          </h1> */}
         </div>
 
         <div className="register_right">
@@ -293,14 +293,14 @@ const Register = () => {
                     Register
                   </button>
                 </div>
-                <div style={{ color: "red", fontFamily: "cursive" }}>
+                <div style={{ color: "red", fontFamily: "var(--mainfont)" ,fontSize:"18px",fontWeight:"bold"}}>
                   {emailError && " Invalid email !! Please try again"}
                 </div>
-                <div style={{ color: "red", fontFamily: "cursive" }}>
+                <div style={{ color: "red", fontFamily: "var(--mainfont)" ,fontSize:"18px",fontWeight:"bold"  }}>
                   {passwordError && " Invalid password!! Please try again"}
                 </div>
 
-                <div style={{ color: "red", fontFamily: "cursive" }}>
+                <div style={{ color: "red", fontFamily: "var(--mainfont)"  ,fontSize:"18px",fontWeight:"bold" }}>
                   {hintError && " Invalid hint!! Please try again"}
                 </div>
 
