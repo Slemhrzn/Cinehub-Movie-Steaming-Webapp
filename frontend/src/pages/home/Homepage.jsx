@@ -63,25 +63,28 @@ const Homepage = () => {
                 backgroundColor: "var(--mainbuttoncolor)",
                 width: "120px",
                 padding: "4px",
-                color:"whitesmoke"
+                color: "whitesmoke",
               }}
             >
               Based on Rating
             </span>
           </Link>
-          <button
-            style={{
-              border: "2px solid whitesmoke",
-              borderRadius: "10px",
-              width: "170px",
-              backgroundColor: "#254369",
-              color: "whitesmoke",
-              padding: "2px",
-              fontWeight:"bold"
-            }}
-          >
-            Based on Playcount
-          </button>
+          <Link to={"/recommendationByPlaycount"} style={{ textDecoration: "none" }}>
+  <button
+    style={{
+      border: "2px solid whitesmoke",
+      borderRadius: "10px",
+      width: "170px",
+      backgroundColor: "#254369",
+      color: "whitesmoke",
+      padding: "2px",
+      fontWeight: "bold",
+    }}
+  >
+    Based on Playcount
+  </button>
+</Link>
+
         </div>
 
         <div
@@ -158,7 +161,7 @@ const Homepage = () => {
                 fontFamily: "var(--mainfont)",
                 fontSize: "22px",
                 fontWeight: "bold",
-                color:"whitesmoke"
+                color: "whitesmoke",
               }}
             >
               No Result Found !

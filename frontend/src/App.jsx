@@ -17,6 +17,7 @@ import Checkbox from "./Checkbox";
 import Bookmark from "./bookmark/Bookmark";
 import EditMovie from "./admin/EditMovie";
 import Recommendation from "./pages/recommendation/Recommendation";
+import RecommendationByPlaycount from "./pages/recommendation/RecommendationByPlaycount";
 // import AllMovies from './pages/home/AllMovies'
 
 function App() {
@@ -73,6 +74,10 @@ function App() {
       path: "/recommendation",
       element: <Recommendation/>,
     },
+    {
+      path:"/recommendationByPlaycount",
+      element:<RecommendationByPlaycount/>
+    }
   ]);
   return <RouterProvider router={router} />;
 }
