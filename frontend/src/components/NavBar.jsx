@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,12 @@ const NavBar = ({ searchedMovies }) => {
   const user=JSON.parse(localStorage.getItem("user"));
   console.log(user);
 
+  useEffect(()=>{
+    if(!user){
+      navigate("/")
+      return
+    }
+  },[])
   function handleLogout() {
     let result = confirm("Do you want to log-out?");
     if (result == true) {
@@ -67,7 +73,7 @@ const NavBar = ({ searchedMovies }) => {
         </div>
       }
       <div onClick={handleLogout}>
-        <FaUserCircle size={30} color="white"/><span style={{color:"whitesmoke",marginLeft:"10px"}}>{user.name}</span>
+        <FaUserCircle size={30} color="white"/><span style={{color:"whitesmoke",marginLeft:"10px"}}>{user?.name}</span>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../components/NavBar";
 import "./Movie.css";
@@ -20,13 +20,20 @@ const Movie = () => {
     duration: "",
     releasedate: "",
   });
+  const [movieRating, setMovieRating] = useState({
+    average_rating: "",
+    total_user: "",
+  });
 
   const [isBookMarked, setIsBookMarked] = useState(false); // Initialize to false
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const navigate = useNavigate();
   const [rating, setRating] = useState(1); // Initial rating
-
+  const [reload, setreload] = useState(false)
   useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
     axios
       .get(`http://localhost/cinehub/movies/getmoviesbyId.php?id=${id}`)
       .then((res) => {
@@ -45,12 +52,22 @@ const Movie = () => {
         console.error("Error fetching movie data:", error);
       });
   }, [id]);
+  console.log(movieRating);
+  useEffect(() => {
+    axios
+      .get(`http://localhost/cinehub/movies/getMovieRating.php?movie_id=${id}`)
+      .then((res) => {
+        console.log(res?.data);
+        setMovieRating(res?.data);
+      })
+      .catch((err) => console.log("Error when fetching rating of movie", err));
+  }, [reload]);
 
   useEffect(() => {
-    if (movie.id) {
+    if (movie?.id) {
       const object = {
-        movie_id: movie.id,
-        user_id: user.id,
+        movie_id: movie?.id,
+        user_id: user?.id,
       };
 
       axios
@@ -60,7 +77,7 @@ const Movie = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [movie.id, user.id]); // Only run when movie ID or user ID changes
+  }, [movie?.id, user?.id]); // Only run when movie ID or user ID changes
 
   const handleBookMark = () => {
     const object = {
@@ -86,6 +103,7 @@ const Movie = () => {
 
   const handleRating = (e) => {
     setRating(parseInt(e.target.value));
+   
   };
 
   function handleSubmit(e) {
@@ -101,13 +119,15 @@ const Movie = () => {
       .then((res) => {
         console.log(res.data.message);
         alert(res.data.message);
+        setreload(!reload)
+        
       })
       .catch((err) => console.log(err));
   }
 
   return (
     <div className="viewmovie_container">
-      <NavBar />
+      {user && user?.role != "ADMIN" && <NavBar />}
 
       <div className="viewmovie_videotag_box">
         <video
@@ -141,27 +161,38 @@ const Movie = () => {
           >
             {movie.name}
           </div>
+          <div>
+            Rating:{" "}
+            {(movieRating?.average_rating) === null
+              ? "No rating available"
+              : parseFloat(movieRating?.average_rating).toFixed(2) + "/" + 5}
+          </div>
+          <div>Voted: {parseInt(movieRating?.total_user) || "Not vote available"}</div>
 
           <div>{movie.description}</div>
-          <div>Rate Movie</div>
-          <form
-            onSubmit={handleSubmit}
-            style={{ display: "flex", gap: "10px" }}
-          >
-            <div>
-              {Array.from({ length: rating }, (_, index) => (
-                <FaStar key={index} />
-              ))}
-            </div>
-            <select onChange={handleRating} value={rating}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <button>Rate</button>
-          </form>
+          {user && user.role != "ADMIN" && (
+            <>
+              <div>Rate Movie</div>
+              <form
+                onSubmit={handleSubmit}
+                style={{ display: "flex", gap: "10px" }}
+              >
+                <div>
+                  {Array.from({ length: rating }, (_, index) => (
+                    <FaStar key={index} />
+                  ))}
+                </div>
+                <select onChange={handleRating} value={rating}>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <button>Rate</button>
+              </form>
+            </>
+          )}
         </div>
 
         <div
@@ -182,13 +213,19 @@ const Movie = () => {
           </div>
 
           <div>
-            <span style={{ fontSize: "17px", fontWeight: "bold",marginRight:"5px" }}>
+            <span
+              style={{
+                fontSize: "17px",
+                fontWeight: "bold",
+                marginRight: "5px",
+              }}
+            >
               Release:
             </span>
             {movie.releasedate}
           </div>
 
-          {user.role === "ADMIN" ? (
+          {user?.role === "ADMIN" ? (
             <div></div>
           ) : (
             <div onClick={handleBookMark}>

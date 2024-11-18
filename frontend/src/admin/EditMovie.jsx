@@ -6,8 +6,14 @@ import { storage } from "../firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { ProgressBar } from "react-loader-spinner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const EditMovie = () => {
+
+  const navigate = useNavigate()
+  const user = localStorage.getItem("user");
+  if(!user){
+    navigate("/")
+  }
   const [data, setData] = useState({
     name: "",
     description: "",

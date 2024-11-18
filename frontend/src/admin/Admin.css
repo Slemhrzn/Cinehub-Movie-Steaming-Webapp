@@ -1,14 +1,16 @@
 .admin_home_container{
     display: flex;
-    height: 100vh;
     font-family: var(--mainfont);
-    
     flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
 }
 
 
 .sidebar {
     width: 250px;
+    position: fixed;
     height: 100%;
     background-image: var(--mainbackground);
     color: #fff;
@@ -41,9 +43,12 @@
 
 
 .main-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: whitesmoke;
+       /* flex-grow: 1; */
+       width: 80%;
+       position: relative;
+       left: 15rem;
+       padding: 20px;
+       background-color: whitesmoke;
 }
 
 .header {
@@ -83,6 +88,7 @@
     border-radius: 4px;
     text-align: center;
     min-height: 20rem;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
 }
 

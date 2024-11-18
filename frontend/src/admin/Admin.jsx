@@ -4,41 +4,48 @@ import { IoLogOut } from "react-icons/io5";
 import { MdManageAccounts } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { BiSolidDashboard } from "react-icons/bi";
+import axios from "axios";
 
 import "./Admin.css";
-import axios from "axios";
+
 const Admindashboard = () => {
+
+  const user = localStorage.getItem("user");
   const navigate = useNavigate();
+  if (!user) {
+    navigate("/");
+    
+  }
 
   const [movies, setMovies] = useState([]);
 
-  let value = localStorage.getItem("user");
-  //    console.log(value);
-  let jValue = JSON.parse(value);
-  //    console.log(jValue);
+  let jValue = user ? JSON.parse(user) : null;
+ 
 
   useEffect(() => {
-    axios.get("http://localhost/cinehub/movies/getmovies.php").then((res) => {
-      // console.log(res);
-      setMovies(res.data);
-    });
-  }, []);
-  // console.log(movies);
+    axios
+      .get("http://localhost/cinehub/movies/getmovies.php")
+      .then((res) => {
+        setMovies(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch movies:", err);
+      });
+  }, [user, navigate]);
 
-  function handleLogout() {
-    let userResponse = confirm("Do you want to log out?");
+  const handleLogout = () => {
+    const userResponse = confirm("Do you want to log out?");
     if (userResponse) {
       localStorage.removeItem("user");
       navigate("/");
     } else {
       alert("Logout cancelled.");
     }
-  }
+  };
 
   return (
     <div className="admin_home_container">
       {/* <Adminnavbar/> */}
-
       <aside className="sidebar">
         <div className="sidebar-header">
           <h2>Cinehub</h2>
@@ -59,41 +66,51 @@ const Admindashboard = () => {
         <header className="header">
           <div className="header-title">
             <h1 style={{ fontFamily: "var(--mainfont)", color: "black" }}>
-              Welcome , {jValue.name} !
+              Welcome, {jValue?.name}!
             </h1>
           </div>
         </header>
-        <section className="movies" >
+        <section className="movies">
           <h2>Available Movies</h2>
           <div className="movies-grid">
-            {movies.map((movies) => {
-              return (
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to={"/viewmovie/" + movies.id}
-                >
-                  <div className="movie-card" >
-                    <img
-                      width="300px"
-                      height="150px"
-                      style={{ objectFit: "cover" }}
-                      src={movies.image}
-                      alt="Movie Title"
-                    />
-                    <h5 style={{ color: "whitesmoke",fontWeight:"bold", fontFamily: "var(--mainfont)" }}>
-                      {movies.name}
-                    </h5>
-                    <p style={{ color: "whitesmoke", fontFamily: "var(--mainfont)" }}>
-                      {Array.isArray(JSON.parse(movies.genre))
-                        ? JSON.parse(movies.genre)?.map((i) => {
-                            return <li>{i}</li>;
-                          })
-                        : JSON.parse(movies.genre)}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+            {movies.map((movie) => (
+              <Link
+                key={movie.id}
+                style={{ textDecoration: "none" }}
+                to={`/viewmovie/${movie.id}`}
+              >
+                <div className="movie-card">
+                  <img
+                    width="300px"
+                    height="150px"
+                    style={{ objectFit: "cover" }}
+                    src={movie.image}
+                    alt={movie.name}
+                  />
+                  <h5
+                    style={{
+                      color: "whitesmoke",
+                      fontWeight: "bold",
+                      fontFamily: "var(--mainfont)",
+                    }}
+                  >
+                    {movie.name}
+                  </h5>
+                  <p
+                    style={{
+                      color: "whitesmoke",
+                      fontFamily: "var(--mainfont)",
+                    }}
+                  >
+                    {Array.isArray(JSON.parse(movie.genre))
+                      ? JSON.parse(movie.genre).map((genre, index) => (
+                          <li key={index}>{genre}</li>
+                        ))
+                      : JSON.parse(movie.genre)}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       </main>

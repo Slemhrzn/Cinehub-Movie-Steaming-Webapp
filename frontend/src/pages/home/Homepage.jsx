@@ -4,11 +4,11 @@ import NavBar from "../../components/NavBar";
 import CarouselShow from "../../components/Carousel";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const [movie, setMovie] = useState([]); // for storing and displaying data
   const [searchedMovie, setSearchedMovie] = useState([]); // for storing searched movies
-
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   // console.log(user);
 
@@ -25,11 +25,29 @@ const Homepage = () => {
     // console.log(search);
     // Convert both the movie name and the search term to lowercase for case-insensitive matching
     const filteredMovies = movie.filter((i) =>
-      i.name.toLowerCase().includes(search.toLowerCase())
+      i?.name.toLowerCase().includes(search.toLowerCase())
     );
     // console.log(filteredMovies);
     setSearchedMovie(filteredMovies); // Update the searchedMovie list based on the search
   };
+
+  function handleIncrementPlayCount(moive_id) {
+    const data = {
+      movie_id: moive_id,
+      user_id: user?.id,
+    };
+    axios
+      .post("http://localhost/cinehub/playcountIncrement.php", data)
+      .then((res) => {
+        console.log(res.data.message);
+        // alert(res.data.message);
+
+        navigate(`/viewmovie/${moive_id}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <div className="homepage_container">
@@ -69,22 +87,24 @@ const Homepage = () => {
               Based on Rating
             </span>
           </Link>
-          <Link to={"/recommendationByPlaycount"} style={{ textDecoration: "none" }}>
-  <button
-    style={{
-      border: "2px solid whitesmoke",
-      borderRadius: "10px",
-      width: "170px",
-      backgroundColor: "#254369",
-      color: "whitesmoke",
-      padding: "2px",
-      fontWeight: "bold",
-    }}
-  >
-    Based on Playcount
-  </button>
-</Link>
-
+          <Link
+            to={"/recommendationByPlaycount"}
+            style={{ textDecoration: "none" }}
+          >
+            <button
+              style={{
+                border: "2px solid whitesmoke",
+                borderRadius: "10px",
+                width: "170px",
+                backgroundColor: "#254369",
+                color: "whitesmoke",
+                padding: "2px",
+                fontWeight: "bold",
+              }}
+            >
+              Based on Playcount
+            </button>
+          </Link>
         </div>
 
         <div
@@ -114,7 +134,7 @@ const Homepage = () => {
                         objectFit: "contain",
                       }}
                       src={movie?.image}
-                      alt={movie.name}
+                      alt={movie?.name}
                     />
                   </div>
 
@@ -130,24 +150,23 @@ const Homepage = () => {
                         color: "black",
                       }}
                     >
-                      {movie.name}
+                      {movie?.name}
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Link to={"/viewmovie/" + movie.id}>
-                          <button
-                            style={{
-                              borderRadius: "20px",
-                              border: "2px solid white",
-                              padding: "2px 4px 2px;",
-                              fontFamily: "var(--mainfont)",
-                              fontWeight: "bold",
-                              padding: "6px",
-                              background: "var(--mainbuttoncolor)",
-                              color: "whitesmoke",
-                            }}
-                          >
-                            Watch
-                          </button>
-                        </Link>
+                        <button
+                          style={{
+                            borderRadius: "20px",
+                            border: "2px solid white",
+                            padding: "2px 4px 2px;",
+                            fontFamily: "var(--mainfont)",
+                            fontWeight: "bold",
+                            padding: "6px",
+                            background: "var(--mainbuttoncolor)",
+                            color: "whitesmoke",
+                          }}
+                          onClick={(e) => handleIncrementPlayCount(movie.id)}
+                        >
+                          Watch
+                        </button>
                       </div>
                     </span>
                   </div>

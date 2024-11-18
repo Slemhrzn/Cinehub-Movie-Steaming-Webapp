@@ -13,7 +13,7 @@ const Recommendation = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost/CINEHUB/algorithm.php?user_id=${user.id}`)
+      .get(`http://localhost/CINEHUB/algorithm.php?user_id=${user?.id}`)
       .then((res) => {
         console.log(res.data.recommendations ?? []);
         setMovies(res.data.recommendations ?? [])

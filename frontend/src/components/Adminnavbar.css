@@ -9,5 +9,7 @@
     font-family: var(--mainfont);
     font-size: 18px;
     font-weight: bold;
-    
+    position: fixed;
+    z-index: 500;
+    background-color: #F5F5F5;
 }

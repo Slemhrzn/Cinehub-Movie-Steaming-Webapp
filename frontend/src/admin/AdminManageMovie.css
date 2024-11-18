@@ -1,5 +1,5 @@
 .admin_container {
-  width: 100vw;
+  width: 100%;
   background-image: var(--mainbackground);
   display: flex;
   align-items: center;
@@ -8,12 +8,13 @@
   padding-bottom: 3rem;
   min-height: 100vh;
   max-height: 100%;
+
 }
 
 .addmovies-button {
     position: absolute;
-    right: 9rem;
-    top: 7rem;
+    right: 0;
+    top: -3rem;
     border-radius: 10px;
     border: 2px solid whitesmoke;
     padding:  5px 20px  ;
@@ -22,18 +23,20 @@
     font-weight: bold;
     background-color:var(--mainbuttoncolor);
     color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
    
   
 }
 
 .addmovies-table {
-  margin-top: 9rem;
+  margin-top: 15rem;
+  position: relative;
   width: 80%;
   border-collapse: collapse;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  overflow: hidden;
+ 
 }
 
 .addmovies-table th,

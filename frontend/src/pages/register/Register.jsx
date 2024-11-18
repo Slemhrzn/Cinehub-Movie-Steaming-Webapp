@@ -10,6 +10,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [hintError, setHintError] = useState(false);
+  const[nameError,setNameError]=useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -34,7 +35,7 @@ const Register = () => {
   }
 
   function validEmail(email) {
-    var reg = /^[a-zA-Z0-9_.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+    var reg = /^[a-zA-Z][a-zA-Z0-9_.]*@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
     return reg.test(email);
   }
 
@@ -170,10 +171,20 @@ const Register = () => {
                       fontSize: "18px",
                     }}
                     className="register_input"
-                    onChange={(e) => setData({ ...data, name: e.target.value })}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // Allow only letters and spaces
+                      if (/^[a-zA-Z\s]*$/.test(value)) {
+                        setData({ ...data, name: value });
+                        setNameError(false);
+                      }else{
+                        setNameError(true);
+                      }
+                    }}
                     type="text"
                     required
                   />
+                   {nameError && " Invalid name !! Please try again"}
                 </div>
 
                 <div className="register_input_container">
@@ -259,7 +270,7 @@ const Register = () => {
                     width: "150px",
                     height: "35px",
                     fontFamily: "var(--mainfont)",
-                    fontSize:"18px"
+                    fontSize: "18px",
                   }}
                   className="register_input"
                   type="text"
@@ -280,27 +291,49 @@ const Register = () => {
                   }}
                 >
                   <button
-                    disabled={emailError}
+                    disabled={emailError || nameError}
                     type="submit"
-                    style={{  fontFamily: "var(--mainfont)",
+                    style={{
+                      fontFamily: "var(--mainfont)",
                       fontSize: "18px",
                       color: "whitesmoke",
-                      fontWeight: "bold", 
-                      background:"#254369"
+                      fontWeight: "bold",
+                      background: "#254369",
                     }}
                     className="register_button"
                   >
                     Register
                   </button>
                 </div>
-                <div style={{ color: "red", fontFamily: "var(--mainfont)" ,fontSize:"18px",fontWeight:"bold"}}>
+                <div
+                  style={{
+                    color: "red",
+                    fontFamily: "var(--mainfont)",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
                   {emailError && " Invalid email !! Please try again"}
                 </div>
-                <div style={{ color: "red", fontFamily: "var(--mainfont)" ,fontSize:"18px",fontWeight:"bold"  }}>
+                <div
+                  style={{
+                    color: "red",
+                    fontFamily: "var(--mainfont)",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
                   {passwordError && " Invalid password!! Please try again"}
                 </div>
 
-                <div style={{ color: "red", fontFamily: "var(--mainfont)"  ,fontSize:"18px",fontWeight:"bold" }}>
+                <div
+                  style={{
+                    color: "red",
+                    fontFamily: "var(--mainfont)",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
                   {hintError && " Invalid hint!! Please try again"}
                 </div>
 
@@ -311,13 +344,17 @@ const Register = () => {
                       fontFamily: "var(--mainfont)",
                       fontSize: "15px",
                       marginBottom: "20px",
-                      fontWeight:"bold"
+                      fontWeight: "bold",
                     }}
                   >
-                   Have an account?{" "}
-                    <Link style={{ 
-                      color: "whitesmoke" }} to="/">
-                    Log in
+                    Have an account?{" "}
+                    <Link
+                      style={{
+                        color: "whitesmoke",
+                      }}
+                      to="/"
+                    >
+                      Log in
                     </Link>
                   </div>
                 </div>

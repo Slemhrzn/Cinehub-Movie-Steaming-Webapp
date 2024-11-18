@@ -6,7 +6,15 @@ import { storage } from "../firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { ProgressBar } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 const Addmovie = () => {
+
+  const navigate = useNavigate()
+  const user = localStorage.getItem("user");
+  if(!user){
+    navigate("/");
+  }
+  
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [imageError, setImageError] = useState(false);
